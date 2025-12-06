@@ -8,6 +8,7 @@ import Header from '@/components/common/Header';
 const App: React.FC = () => {
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+      <Toaster />
       <Router>
         <div className="flex flex-col min-h-screen">
           <Header />
@@ -24,7 +25,6 @@ const App: React.FC = () => {
             </Routes>
           </main>
         </div>
-        <Toaster />
       </Router>
     </ThemeProvider>
   );
