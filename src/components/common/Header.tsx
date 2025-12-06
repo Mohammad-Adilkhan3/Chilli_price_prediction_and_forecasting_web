@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Sparkles } from "lucide-react";
 import routes from "../../routes";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "./ThemeToggle";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,9 +39,11 @@ const Header: React.FC = () => {
                 {item.name}
               </Link>
             ))}
+            <ThemeToggle />
           </div>
 
-          <div className="xl:hidden flex items-center">
+          <div className="xl:hidden flex items-center gap-2">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
