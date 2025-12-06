@@ -9,6 +9,7 @@ import { TrendingUp, TrendingDown, Target, Brain, Droplets, Package, Upload, Fil
 import PageMeta from '@/components/common/PageMeta';
 import { generateCombinedData, generateDataForYearMonth, modelPerformanceData, cities, varieties, models, frequencies, generateYears, months, parseCSVData, type UploadedDataset } from '@/utils/mockData';
 import { toast } from '@/hooks/use-toast';
+import { useDataset } from '@/contexts/DatasetContext';
 
 const Dashboard: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState('Bangalore');
@@ -18,8 +19,9 @@ const Dashboard: React.FC = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [isLoading, setIsLoading] = useState(false);
-  const [uploadedDataset, setUploadedDataset] = useState<UploadedDataset | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  const { uploadedDataset, setUploadedDataset } = useDataset();
 
   const years = useMemo(() => generateYears(), []);
 

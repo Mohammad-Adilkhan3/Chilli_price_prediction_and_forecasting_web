@@ -4,6 +4,7 @@ import { Menu, X, Sparkles } from "lucide-react";
 import routes from "../../routes";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
+import DatasetUpload from "./DatasetUpload";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,7 +26,7 @@ const Header: React.FC = () => {
             </Link>
           </div>
 
-          <div className="hidden xl:flex items-center gap-6">
+          <div className="hidden xl:flex items-center gap-4">
             {navigation.map((item) => (
               <Link
                 key={item.path}
@@ -39,10 +40,14 @@ const Header: React.FC = () => {
                 {item.name}
               </Link>
             ))}
-            <ThemeToggle />
+            <div className="flex items-center gap-2 pl-2 border-l border-border/50">
+              <DatasetUpload />
+              <ThemeToggle />
+            </div>
           </div>
 
           <div className="xl:hidden flex items-center gap-2">
+            <DatasetUpload />
             <ThemeToggle />
             <Button
               variant="ghost"
