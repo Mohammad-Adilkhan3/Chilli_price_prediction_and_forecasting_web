@@ -3,7 +3,7 @@ import { Upload, X, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { useDataset } from '@/contexts/DatasetContext';
-import { parseCSVData, type UploadedDataset } from '@/utils/mockData';
+import { parseCSVData, limitDatasetSize, type UploadedDataset } from '@/utils/mockData';
 
 const DatasetUpload: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -23,11 +23,21 @@ const DatasetUpload: React.FC = () => {
       return;
     }
 
+    // Check file size (limit to 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: 'File Too Large',
+        description: 'Please upload a file smaller than 5MB',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
         const csvText = e.target?.result as string;
-        const parsedData = parseCSVData(csvText);
+        let parsedData = parseCSVData(csvText);
 
         if (parsedData.length === 0) {
           toast({
@@ -38,6 +48,10 @@ const DatasetUpload: React.FC = () => {
           return;
         }
 
+        // Limit dataset size for performance
+        const originalLength = parsedData.length;
+        parsedData = limitDatasetSize(parsedData, 1000);
+
         const dataset: UploadedDataset = {
           fileName: file.name,
           uploadDate: new Date(),
@@ -46,9 +60,14 @@ const DatasetUpload: React.FC = () => {
         };
 
         setUploadedDataset(dataset);
+        
+        const message = originalLength > 1000 
+          ? `Loaded ${parsedData.length} of ${originalLength} records (limited for performance)`
+          : `Successfully loaded ${parsedData.length} records`;
+
         toast({
           title: 'Dataset Uploaded',
-          description: `Successfully loaded ${parsedData.length} records`,
+          description: message,
         });
       } catch (error) {
         toast({

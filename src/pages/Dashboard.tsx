@@ -7,7 +7,7 @@ import { MetricCard } from '@/components/ui/metric-card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { TrendingUp, TrendingDown, Target, Brain, Droplets, Package, Upload, FileText, CheckCircle, AlertCircle } from 'lucide-react';
 import PageMeta from '@/components/common/PageMeta';
-import { generateCombinedData, generateDataForYearMonth, modelPerformanceData, cities, varieties, models, frequencies, generateYears, months, parseCSVData, type UploadedDataset } from '@/utils/mockData';
+import { generateCombinedData, generateDataForYearMonth, modelPerformanceData, cities, varieties, models, frequencies, generateYears, months, parseCSVData, sampleDataForDisplay, limitDatasetSize, type UploadedDataset } from '@/utils/mockData';
 import { toast } from '@/hooks/use-toast';
 import { useDataset } from '@/contexts/DatasetContext';
 
@@ -25,12 +25,18 @@ const Dashboard: React.FC = () => {
 
   const years = useMemo(() => generateYears(), []);
 
-  const chartData = useMemo(() => {
+  // Get raw data
+  const rawChartData = useMemo(() => {
     if (uploadedDataset) {
       return uploadedDataset.data;
     }
     return generateDataForYearMonth(selectedYear, selectedMonth);
   }, [selectedYear, selectedMonth, uploadedDataset]);
+
+  // Sample data for chart display to improve performance
+  const chartData = useMemo(() => {
+    return sampleDataForDisplay(rawChartData, 150);
+  }, [rawChartData]);
 
   const currentModel = modelPerformanceData.find(m => m.name === selectedModel) || modelPerformanceData[0];
 
@@ -57,11 +63,21 @@ const Dashboard: React.FC = () => {
       return;
     }
 
+    // Check file size (limit to 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: 'File Too Large',
+        description: 'Please upload a file smaller than 5MB',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
         const text = e.target?.result as string;
-        const parsedData = parseCSVData(text);
+        let parsedData = parseCSVData(text);
 
         if (parsedData.length === 0) {
           toast({
@@ -72,6 +88,10 @@ const Dashboard: React.FC = () => {
           return;
         }
 
+        // Limit dataset size for performance
+        const originalLength = parsedData.length;
+        parsedData = limitDatasetSize(parsedData, 1000);
+
         const dataset: UploadedDataset = {
           fileName: file.name,
           uploadDate: new Date(),
@@ -80,9 +100,14 @@ const Dashboard: React.FC = () => {
         };
 
         setUploadedDataset(dataset);
+        
+        const message = originalLength > 1000 
+          ? `Loaded ${parsedData.length} of ${originalLength} records (limited for performance)`
+          : `Loaded ${parsedData.length} records from ${file.name}`;
+
         toast({
           title: 'Dataset Uploaded Successfully',
-          description: `Loaded ${parsedData.length} records from ${file.name}`
+          description: message
         });
       } catch (error) {
         toast({

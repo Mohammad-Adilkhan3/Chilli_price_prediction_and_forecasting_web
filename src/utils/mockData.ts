@@ -253,3 +253,34 @@ export const parseCSVData = (csvText: string): PriceDataPoint[] => {
   
   return data;
 };
+
+// Performance optimization: Sample large datasets for chart display
+export const sampleDataForDisplay = (data: PriceDataPoint[], maxPoints: number = 100): PriceDataPoint[] => {
+  if (data.length <= maxPoints) {
+    return data;
+  }
+  
+  const step = Math.ceil(data.length / maxPoints);
+  const sampledData: PriceDataPoint[] = [];
+  
+  for (let i = 0; i < data.length; i += step) {
+    sampledData.push(data[i]);
+  }
+  
+  // Always include the last data point
+  if (sampledData[sampledData.length - 1] !== data[data.length - 1]) {
+    sampledData.push(data[data.length - 1]);
+  }
+  
+  return sampledData;
+};
+
+// Limit dataset size on upload to prevent performance issues
+export const limitDatasetSize = (data: PriceDataPoint[], maxRows: number = 1000): PriceDataPoint[] => {
+  if (data.length <= maxRows) {
+    return data;
+  }
+  
+  console.warn(`Dataset has ${data.length} rows. Limiting to ${maxRows} most recent rows for performance.`);
+  return data.slice(-maxRows);
+};
