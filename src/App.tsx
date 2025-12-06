@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'next-themes';
+import { Toaster } from '@/components/ui/toaster';
 import routes from './routes';
 import Header from '@/components/common/Header';
 
@@ -23,6 +24,7 @@ const App: React.FC = () => {
             </Routes>
           </main>
         </div>
+        <Toaster />
       </Router>
     </ThemeProvider>
   );

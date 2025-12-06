@@ -171,3 +171,85 @@ export const cities = ['Bangalore', 'Mumbai', 'Delhi', 'Guntur', 'Warangal'];
 export const varieties = ['Guntur', 'Byadgi', 'Teja', 'Sannam', 'Wonder Hot'];
 export const models = ['Random Forest', 'XGBoost', 'LSTM', 'Linear Regression'];
 export const frequencies = ['Weekly', 'Monthly', 'Yearly'];
+
+export const generateYears = (): number[] => {
+  const currentYear = new Date().getFullYear();
+  const years = [];
+  for (let i = currentYear - 5; i <= currentYear + 2; i++) {
+    years.push(i);
+  }
+  return years;
+};
+
+export const months = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+export const generateDataForYearMonth = (year: number, month: number): PriceDataPoint[] => {
+  const data: PriceDataPoint[] = [];
+  const basePrice = 28000;
+  const daysInMonth = new Date(year, month, 0).getDate();
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = new Date(year, month - 1, day);
+    
+    const seasonalFactor = Math.sin((month / 12) * Math.PI * 2) * 0.15;
+    const trendFactor = (year - 2020) / 10 * 0.1;
+    const randomFactor = (Math.random() - 0.5) * 0.08;
+
+    const price = basePrice * (1 + seasonalFactor + trendFactor + randomFactor);
+    const rainfall = 50 + Math.random() * 100 + Math.sin((month / 12) * Math.PI * 2) * 30;
+    const arrivals = 2000 + Math.random() * 500;
+    const temperature = 25 + Math.random() * 10 + Math.sin((month / 12) * Math.PI * 2) * 5;
+
+    data.push({
+      date: date.toISOString().split('T')[0],
+      price: Math.round(price),
+      rainfall: Math.round(rainfall * 10) / 10,
+      arrivals: Math.round(arrivals),
+      temperature: Math.round(temperature * 10) / 10
+    });
+  }
+
+  return data;
+};
+
+export interface UploadedDataset {
+  fileName: string;
+  uploadDate: Date;
+  rowCount: number;
+  data: PriceDataPoint[];
+}
+
+export const parseCSVData = (csvText: string): PriceDataPoint[] => {
+  const lines = csvText.trim().split('\n');
+  const headers = lines[0].toLowerCase().split(',').map(h => h.trim());
+  
+  const data: PriceDataPoint[] = [];
+  
+  for (let i = 1; i < lines.length; i++) {
+    const values = lines[i].split(',').map(v => v.trim());
+    const row: any = {};
+    
+    headers.forEach((header, index) => {
+      if (header.includes('date')) {
+        row.date = values[index];
+      } else if (header.includes('price')) {
+        row.price = Number.parseFloat(values[index]) || 0;
+      } else if (header.includes('rainfall') || header.includes('rain')) {
+        row.rainfall = Number.parseFloat(values[index]) || 0;
+      } else if (header.includes('arrival') || header.includes('supply')) {
+        row.arrivals = Number.parseFloat(values[index]) || 0;
+      } else if (header.includes('temp')) {
+        row.temperature = Number.parseFloat(values[index]) || 0;
+      }
+    });
+    
+    if (row.date && row.price) {
+      data.push(row as PriceDataPoint);
+    }
+  }
+  
+  return data;
+};

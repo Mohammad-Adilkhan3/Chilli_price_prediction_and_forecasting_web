@@ -14,20 +14,26 @@ A high-end professional AI product platform for agricultural price intelligence,
 - Enable interactive data exploration through advanced visualizations
 - Offer conversational AI assistance for market analysis
 - Present a professional, futuristic interface suitable for enterprise use
+- Support custom dataset uploads for flexible prediction scenarios
 
 ## 2. Technical Architecture
-\n### 2.1 Frontend Stack
+
+### 2.1 Frontend Stack
 - **Framework**: React.js\n- **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
 - **Charts & Visualization**: Recharts / Chart.js / D3.js
 - **Typography**: Inter / Poppins fonts
-\n### 2.2 Backend Stack
+- **File Upload**: React Dropzone or native file input with drag-and-drop support
+
+### 2.2 Backend Stack
 - **API Framework**: Python FastAPI
 - **ML Models**: Scikit-learn, XGBoost, RandomForest, LSTM (optional)
-- **AI Features**: LLM-based AI Assistant (API ready)\n- **Database**: PostgreSQL / MongoDB
-\n### 2.3 Deployment Architecture
-- Modular, scalable architecture
-- API-first design
+- **AI Features**: LLM-based AI Assistant (API ready)
+- **Database**: PostgreSQL / MongoDB
+- **File Processing**: Pandas for CSV/Excel parsing, validation, and preprocessing
+
+### 2.3 Deployment Architecture
+- Modular, scalable architecture\n- API-first design
 - Ready for production deployment
 \n## 3. Core Features & Pages
 
@@ -41,55 +47,70 @@ A high-end professional AI product platform for agricultural price intelligence,
 - R² Score visualization
 - Real-time data pulse animations
 
-**Call-to-Action Buttons**:\n- 'Launch AI Dashboard' (primary CTA)
-- 'Talk to AI Assistant' (secondary CTA)\n
-### 3.2 AI Prediction Dashboard
-\n**Left Sidebar (Minimal & Professional)**:
-- Crop Selection dropdown
+**Call-to-Action Buttons**:
+- 'Launch AI Dashboard' (primary CTA)
+- 'Talk to AI Assistant' (secondary CTA)
+\n### 3.2 AI Prediction Dashboard
+
+**Left Sidebar (Minimal & Professional)**:
+- **Dataset Upload Section**:
+  - Upload button with file icon and 'Upload Custom Dataset' label
+  - Supported formats: CSV, Excel (.xlsx, .xls)
+  - Drag-and-drop zone with visual feedback
+  - File validation and preview of uploaded data columns
+  - Success/error notifications for upload status
+  - Option to use default dataset or uploaded dataset
+
+- **Time Selection**:
+  - Year dropdown selector (dynamic range based on available data)
+  - Month dropdown selector (January - December)
+  - Auto-update predictions when year/month changes
+\n- Crop Selection dropdown
 - Market / City selector
-- Variety filter
-- Time Frequency options: Weekly / Monthly / Yearly
+- Variety filter\n- Time Frequency options: Weekly / Monthly / Yearly
 - Model Selector with AI recommendation badge
-- 'Run Prediction' button with loading animation
+-'Run Prediction' button with loading animation
 
 **Main Content Area**:
-\n*AI Price Prediction Card*:\n- Large animated ₹ value display
+\n*AI Price Prediction Card*:
+- Large animated ₹ value display
 - Confidence interval range
 - Trend indicator (↑ ↓) with color coding
 - Prediction timestamp
+- Display selected year and month context
 
 *Interactive Charts*:
-- Price trend over time (line chart)
+- Price trend over time (line chart) - filtered by selected year/month
 - Forecast vs Actual comparison (dual-axis chart)
 - Seasonal demand heatmap
 - Rainfall vs Price correlation scatter plot
 
 **KPI AI Widgets**:
-- Accuracy percentage with circular progress
-- MAE value card
+- Accuracy percentage with circular progress\n- MAE value card
 - RMSE indicator
 - AI Confidence Score meter
-
-### 3.3 AI Insights Engine
+\n### 3.3 AI Insights Engine
 
 **Auto-Generated Explanations**:
-- Natural language insights:'Price is expected to increase due to lower arrivals and reduced rainfall'
-- Context-aware analysis based on current data
+- Natural language insights: 'Price is expected to increase due to lower arrivals and reduced rainfall'
+- Context-aware analysis based on current data and selected time period
 \n**Risk Alerts**:
 - Supply volatility warnings
 - Weather anomaly notifications
 - Market disruption alerts
-
-**Future Trend Highlights**:
+\n**Future Trend Highlights**:
 - 3-6 month forecast summaries
-- Key inflection points\n- Seasonal pattern predictions
+- Key inflection points
+- Seasonal pattern predictions
 
 ### 3.4 AI Chat Assistant
-\n**Capabilities**:
+
+**Capabilities**:
 - Trained on dataset metadata, market history, and model outputs
 - Answers questions like:\n  - 'Why is price high next month?'
-  - 'Compare 2024 vs 2027 prices'
+  - 'Compare2024 vs 2027 prices'
   - 'Which market is better to sell?'
+  - 'Show predictions for January 2025'
 
 **UI Components**:
 - Floating AI bubble for quick access
@@ -106,6 +127,7 @@ A high-end professional AI product platform for agricultural price intelligence,
   - Arrivals adjustment (↑ ↓)
 -'What-if analysis' powered by AI
 - Real-time chart updates based on parameter changes
+- Year/month filter integration
 
 ### 3.6 Model Intelligence Page
 
@@ -120,18 +142,25 @@ A high-end professional AI product platform for agricultural price intelligence,
 - Training accuracy trends
 
 ### 3.7 Backend AI System
-\n**API Endpoints**:
-- `/predict` - Price prediction inference
-- `/ai-insights` - Generate AI explanations
-- `/chat` - Conversational AI assistant
-- `/charts-data` - Visualization data retrieval
+
+**API Endpoints**:
+- `/predict` - Price prediction inference (accepts year, month, and dataset parameters)
+- `/upload-dataset` - Handle custom dataset uploads, validation, and storage
+- `/ai-insights` - Generate AI explanations\n- `/chat` - Conversational AI assistant\n- `/charts-data` - Visualization data retrieval (filtered by year/month)
 
 **ML Pipeline**:
 - Data cleaning and preprocessing
-- Feature engineering
-- Model training and validation
-- Real-time inference
+- Feature engineering\n- Model training and validation
+- Real-time inference based on selected year/month
 - Integration with Agmarknet and NICRA datasets
+- Custom dataset processing and integration
+
+**Dataset Upload Processing**:
+- File validation (format, size, required columns)
+- Data quality checks (missing values, outliers, data types)
+- Automatic feature extraction and alignment with model requirements
+- Temporary or persistent storage based on user preference
+- Error handling with detailed feedback messages
 
 ### 3.8 Professional Enhancements
 
@@ -140,6 +169,8 @@ A high-end professional AI product platform for agricultural price intelligence,
 - Skeleton loaders for content\n- Comprehensive error-handling UI
 - Fully responsive design for all screen sizes
 - Admin-ready architecture for future expansion
+- Smooth transitions when switching between years/months
+- Visual feedback for dataset upload progress
 
 ## 4. Design System
 
@@ -153,12 +184,14 @@ A high-end professional AI product platform for agricultural price intelligence,
 - **Shadows**: Multi-layer shadows with neon accent glow on interactive elements
 - **Borders**: 1px solid with gradient overlays,8px border-radius
 - **Icons**: Outlined style with consistent2px stroke width
+- **Upload Zone**: Dashed border with hover state, icon-centered layout
 
 ### 4.3 Animation & Interaction
-- **Micro-interactions**: Smooth hover states with 200ms transitions
+- **Micro-interactions**: Smooth hover states with200ms transitions
 - **Page Transitions**: Fade and slide effects using Framer Motion
 - **Chart Animations**: Staggered entry animations for data points
 - **Loading States**: Pulsing gradient animations
+- **Upload Feedback**: Progress bar with percentage indicator, success checkmark animation
 
 ### 4.4 Layout Structure
 - **Dashboard Layout**: Sidebar + main content grid system
@@ -168,17 +201,17 @@ A high-end professional AI product platform for agricultural price intelligence,
 
 ## 5. Reference Materials
 
-### 5.1 Current Interface Screenshot
-User provided existing dashboard interface: WhatsApp Image 2025-12-05 at 20.18.49_18cee13a.jpg
-
-This screenshot shows the current Karnataka Red Chilli Price Prediction Model interface, which will be redesigned according to the specifications above to achieve a professional AI platform aesthetic.
+### 5.1 Current Interface Screenshots
+- WhatsApp Image 2025-12-05 at 20.18.49_18cee13a.jpg (existing dashboard interface showing Karnataka Red Chilli Price Prediction Model)
+\nThese screenshots show the current interface, which will be redesigned and enhanced according to the specifications above to achieve a professional AI platform aesthetic with added year/month selection and dataset upload capabilities.
 
 ## 6. Project Deliverables
 
 - Fully implemented frontend with React.js + Tailwind CSS
-- Complete backend API with FastAPI
-- Integrated ML models with prediction pipeline
+- Complete backend API with FastAPI\n- Integrated ML models with prediction pipeline
 - AI chat assistant functionality
+- Dataset upload and processing system
+- Year/month-based prediction filtering
 - Clean, modular, production-ready code
 - Responsive design for all devices
 - Documentation for deployment and maintenance
@@ -190,3 +223,5 @@ This screenshot shows the current Karnataka Red Chilli Price Prediction Model in
 - Final year academic project
 - Startup MVP foundation
 - Enterprise agricultural intelligence solution
+- Custom market analysis with user-provided datasets
+- Historical trend analysis by specific time periods
