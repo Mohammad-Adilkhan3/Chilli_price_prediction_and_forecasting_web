@@ -1,15 +1,13 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Button } from '@/components/ui/button';
 import { GlassCard } from '@/components/ui/glass-card';
 import { MetricCard } from '@/components/ui/metric-card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { TrendingUp, TrendingDown, Target, Brain, Droplets, Package, Upload, FileText, CheckCircle, AlertCircle } from 'lucide-react';
+import { TrendingUp, TrendingDown, Target, Brain, Droplets, Package } from 'lucide-react';
 import PageMeta from '@/components/common/PageMeta';
-import { generateCombinedData, generateDataForYearMonth, modelPerformanceData, cities, varieties, models, frequencies, generateYears, months, parseCSVData, sampleDataForDisplay, limitDatasetSize, type UploadedDataset } from '@/utils/mockData';
-import { toast } from '@/hooks/use-toast';
-import { useDataset } from '@/contexts/DatasetContext';
+import { generateDataForYearMonth, modelPerformanceData, cities, varieties, models, frequencies, generateYears, months, sampleDataForDisplay } from '@/utils/mockData';
 
 const Dashboard: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState('Bangalore');
@@ -19,19 +17,13 @@ const Dashboard: React.FC = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [isLoading, setIsLoading] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  
-  const { uploadedDataset, setUploadedDataset } = useDataset();
 
   const years = useMemo(() => generateYears(), []);
 
-  // Get raw data
+  // Get raw data based on selected year and month
   const rawChartData = useMemo(() => {
-    if (uploadedDataset) {
-      return uploadedDataset.data;
-    }
     return generateDataForYearMonth(selectedYear, selectedMonth);
-  }, [selectedYear, selectedMonth, uploadedDataset]);
+  }, [selectedYear, selectedMonth]);
 
   // Sample data for chart display to improve performance
   const chartData = useMemo(() => {
@@ -48,87 +40,6 @@ const Dashboard: React.FC = () => {
   const handleRunPrediction = () => {
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 1500);
-  };
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    if (!file.name.endsWith('.csv')) {
-      toast({
-        title: 'Invalid File Format',
-        description: 'Please upload a CSV file',
-        variant: 'destructive'
-      });
-      return;
-    }
-
-    // Check file size (limit to 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      toast({
-        title: 'File Too Large',
-        description: 'Please upload a file smaller than 5MB',
-        variant: 'destructive',
-      });
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const text = e.target?.result as string;
-        let parsedData = parseCSVData(text);
-
-        if (parsedData.length === 0) {
-          toast({
-            title: 'No Data Found',
-            description: 'The CSV file does not contain valid data',
-            variant: 'destructive'
-          });
-          return;
-        }
-
-        // Limit dataset size for performance
-        const originalLength = parsedData.length;
-        parsedData = limitDatasetSize(parsedData, 1000);
-
-        const dataset: UploadedDataset = {
-          fileName: file.name,
-          uploadDate: new Date(),
-          rowCount: parsedData.length,
-          data: parsedData
-        };
-
-        setUploadedDataset(dataset);
-        
-        const message = originalLength > 1000 
-          ? `Loaded ${parsedData.length} of ${originalLength} records (limited for performance)`
-          : `Loaded ${parsedData.length} records from ${file.name}`;
-
-        toast({
-          title: 'Dataset Uploaded Successfully',
-          description: message
-        });
-      } catch (error) {
-        toast({
-          title: 'Upload Failed',
-          description: 'Error parsing CSV file. Please check the format.',
-          variant: 'destructive'
-        });
-      }
-    };
-    reader.readAsText(file);
-  };
-
-  const handleClearDataset = () => {
-    setUploadedDataset(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-    toast({
-      title: 'Dataset Cleared',
-      description: 'Using default prediction data'
-    });
   };
 
   const containerVariants = {
@@ -269,62 +180,6 @@ const Dashboard: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="pt-4 border-t border-border/50">
-                      <label className="text-sm font-medium mb-2 block flex items-center gap-2">
-                        <Upload className="w-4 h-4" />
-                        Upload Dataset
-                      </label>
-                      
-                      {uploadedDataset ? (
-                        <div className="space-y-2">
-                          <div className="p-3 rounded-lg bg-success/10 border border-success/20">
-                            <div className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-success truncate">{uploadedDataset.fileName}</p>
-                                <p className="text-xs text-muted-foreground">{uploadedDataset.rowCount} records</p>
-                              </div>
-                            </div>
-                          </div>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={handleClearDataset}
-                            className="w-full"
-                          >
-                            Clear Dataset
-                          </Button>
-                        </div>
-                      ) : (
-                        <>
-                          <input
-                            ref={fileInputRef}
-                            type="file"
-                            accept=".csv"
-                            onChange={handleFileUpload}
-                            className="hidden"
-                            id="dataset-upload"
-                          />
-                          <label htmlFor="dataset-upload">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="w-full"
-                              asChild
-                            >
-                              <span className="flex items-center gap-2 cursor-pointer">
-                                <FileText className="w-4 h-4" />
-                                Choose CSV File
-                              </span>
-                            </Button>
-                          </label>
-                          <p className="text-xs text-muted-foreground mt-2">
-                            Upload CSV with columns: date, price, rainfall, arrivals
-                          </p>
-                        </>
-                      )}
-                    </div>
-
                     <Button
                       className="w-full gradient-primary glow-primary"
                       onClick={handleRunPrediction}
@@ -356,14 +211,6 @@ const Dashboard: React.FC = () => {
                         <span className="font-semibold">{priceChange}%</span>
                       </div>
                     </div>
-                    {uploadedDataset && (
-                      <div className="mb-4 p-2 rounded bg-primary/10 border border-primary/20">
-                        <p className="text-xs text-primary flex items-center gap-2">
-                          <FileText className="w-3 h-3" />
-                          Using uploaded dataset: {uploadedDataset.fileName}
-                        </p>
-                      </div>
-                    )}
                     <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 pt-4 border-t border-border/50">
                       <div>
                         <p className="text-xs text-muted-foreground mb-1">Confidence</p>
