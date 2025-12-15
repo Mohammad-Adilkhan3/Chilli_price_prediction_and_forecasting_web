@@ -194,7 +194,7 @@ export const frequencies = ['Weekly', 'Monthly', 'Yearly'];
 export const generateYears = (): number[] => {
   const currentYear = new Date().getFullYear();
   const years = [];
-  for (let i = currentYear - 5; i <= currentYear + 2; i++) {
+  for (let i = currentYear - 5; i <= 2040; i++) {
     years.push(i);
   }
   return years;
