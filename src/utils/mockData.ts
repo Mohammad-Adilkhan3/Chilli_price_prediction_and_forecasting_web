@@ -45,16 +45,16 @@ export interface Insight {
 
 export const generateHistoricalData = (months: number = 24): PriceDataPoint[] => {
   const data: PriceDataPoint[] = [];
-  const basePrice = 28000;
+  const basePrice = 28500;
   const today = new Date();
 
   for (let i = months; i >= 0; i--) {
     const date = new Date(today);
     date.setMonth(date.getMonth() - i);
 
-    const seasonalFactor = Math.sin((date.getMonth() / 12) * Math.PI * 2) * 0.15;
-    const trendFactor = (months - i) / months * 0.1;
-    const randomFactor = (Math.random() - 0.5) * 0.1;
+    const seasonalFactor = Math.sin((date.getMonth() / 12) * Math.PI * 2) * 0.08;
+    const trendFactor = (months - i) / months * 0.05;
+    const randomFactor = (Math.random() - 0.5) * 0.05;
 
     const price = basePrice * (1 + seasonalFactor + trendFactor + randomFactor);
     const rainfall = 50 + Math.random() * 100 + Math.sin((date.getMonth() / 12) * Math.PI * 2) * 30;
@@ -83,12 +83,12 @@ export const generateForecastData = (months: number = 6): PriceDataPoint[] => {
     const date = new Date(today);
     date.setMonth(date.getMonth() + i);
 
-    const seasonalFactor = Math.sin((date.getMonth() / 12) * Math.PI * 2) * 0.15;
-    const trendFactor = i / months * 0.08;
-    const randomFactor = (Math.random() - 0.5) * 0.05;
+    const seasonalFactor = Math.sin((date.getMonth() / 12) * Math.PI * 2) * 0.08;
+    const trendFactor = i / months * 0.04;
+    const randomFactor = (Math.random() - 0.5) * 0.03;
 
     const forecast = lastPrice * (1 + seasonalFactor + trendFactor + randomFactor);
-    const actual = i <= 2 ? forecast * (1 + (Math.random() - 0.5) * 0.03) : undefined;
+    const actual = i <= 2 ? forecast * (1 + (Math.random() - 0.5) * 0.02) : undefined;
 
     data.push({
       date: date.toISOString().split('T')[0],
@@ -207,15 +207,15 @@ export const months = [
 
 export const generateDataForYearMonth = (year: number, month: number): PriceDataPoint[] => {
   const data: PriceDataPoint[] = [];
-  const basePrice = 28000;
+  const basePrice = 28500;
   const daysInMonth = new Date(year, month, 0).getDate();
 
   for (let day = 1; day <= daysInMonth; day++) {
     const date = new Date(year, month - 1, day);
     
-    const seasonalFactor = Math.sin((month / 12) * Math.PI * 2) * 0.15;
-    const trendFactor = (year - 2020) / 10 * 0.1;
-    const randomFactor = (Math.random() - 0.5) * 0.08;
+    const seasonalFactor = Math.sin((month / 12) * Math.PI * 2) * 0.08;
+    const trendFactor = (year - 2020) / 10 * 0.05;
+    const randomFactor = (Math.random() - 0.5) * 0.05;
 
     const price = basePrice * (1 + seasonalFactor + trendFactor + randomFactor);
     const rainfall = 50 + Math.random() * 100 + Math.sin((month / 12) * Math.PI * 2) * 30;

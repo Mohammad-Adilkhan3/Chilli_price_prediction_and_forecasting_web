@@ -182,23 +182,23 @@ class ModelManager:
   
   def _mock_prediction(self, month: int, arrivals: float, rainfall: float) -> float:
     """Generate mock prediction when model is not available"""
-    base_price = 28000
+    base_price = 28500
     
     # Seasonal factor (higher prices in dry months)
-    seasonal_factor = np.sin((month / 12) * np.pi * 2) * 0.15
+    seasonal_factor = np.sin((month / 12) * np.pi * 2) * 0.08
     
     # Arrivals factor (lower arrivals = higher prices)
-    arrivals_factor = (2500 - arrivals) / 2500 * 0.1
+    arrivals_factor = (2500 - arrivals) / 2500 * 0.05
     
     # Rainfall factor (lower rainfall = higher prices)
-    rainfall_factor = (100 - rainfall) / 100 * 0.08
+    rainfall_factor = (100 - rainfall) / 100 * 0.04
     
     # Random variation
     random_factor = np.random.uniform(-0.02, 0.02)
     
     price = base_price * (1 + seasonal_factor + arrivals_factor + rainfall_factor + random_factor)
     
-    return max(price, 15000)  # Minimum price floor
+    return max(price, 25000)  # Minimum price floor
   
   def get_model_performance(self, model_key: str) -> Dict[str, float]:
     """Get performance metrics for a specific model"""

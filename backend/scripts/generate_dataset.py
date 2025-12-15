@@ -19,12 +19,12 @@ VARIETIES = ["Guntur", "Byadgi", "Teja", "Sannam", "Kashmiri", "Warangal"]
 
 # Base prices for different varieties (₹ per quintal)
 BASE_PRICES = {
-  "Guntur": 28000,
-  "Byadgi": 32000,
-  "Teja": 30000,
-  "Sannam": 26000,
-  "Kashmiri": 35000,
-  "Warangal": 27000
+  "Guntur": 28500,
+  "Byadgi": 32500,
+  "Teja": 30500,
+  "Sannam": 27000,
+  "Kashmiri": 35500,
+  "Warangal": 27500
 }
 
 def generate_dataset(num_samples: int = NUM_SAMPLES) -> pd.DataFrame:
@@ -51,15 +51,15 @@ def generate_dataset(num_samples: int = NUM_SAMPLES) -> pd.DataFrame:
     month = date.month
     
     # Seasonal factor (higher prices in winter, lower in monsoon)
-    seasonal_factor = np.sin((month / 12) * np.pi * 2) * 0.15
+    seasonal_factor = np.sin((month / 12) * np.pi * 2) * 0.08
     
     # Year trend (gradual increase over years)
-    year_factor = (date.year - 2010) / 15 * 0.2
+    year_factor = (date.year - 2010) / 15 * 0.1
     
     # Arrivals (quintals) - affects price inversely
     arrivals = np.random.normal(2000, 400)
     arrivals = max(500, min(arrivals, 4000))  # Clamp between 500-4000
-    arrivals_factor = (2500 - arrivals) / 2500 * 0.15
+    arrivals_factor = (2500 - arrivals) / 2500 * 0.08
     
     # Rainfall (mm) - affects price inversely
     # More rain in monsoon months (June-September)
@@ -68,7 +68,7 @@ def generate_dataset(num_samples: int = NUM_SAMPLES) -> pd.DataFrame:
     else:
       rainfall = np.random.normal(30, 20)
     rainfall = max(0, min(rainfall, 300))  # Clamp between 0-300
-    rainfall_factor = (100 - rainfall) / 100 * 0.1
+    rainfall_factor = (100 - rainfall) / 100 * 0.05
     
     # Temperature (°C) - seasonal variation
     base_temp = 25
@@ -90,7 +90,7 @@ def generate_dataset(num_samples: int = NUM_SAMPLES) -> pd.DataFrame:
     market_factor = market_factors.get(market, 0)
     
     # Random noise
-    noise = np.random.normal(0, 0.05)
+    noise = np.random.normal(0, 0.03)
     
     # Calculate final price
     total_factor = (
@@ -98,7 +98,7 @@ def generate_dataset(num_samples: int = NUM_SAMPLES) -> pd.DataFrame:
       rainfall_factor + market_factor + noise
     )
     price = base_price * total_factor
-    price = max(10000, price)  # Minimum price floor
+    price = max(25000, price)  # Minimum price floor
     
     # Round values
     price = round(price, 2)
