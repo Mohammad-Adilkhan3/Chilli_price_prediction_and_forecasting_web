@@ -1,0 +1,35 @@
+# AgriAI Backend Requirements
+# Python 3.9+ required
+
+# Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+python-multipart==0.0.6
+
+# Machine Learning
+scikit-learn==1.3.2
+xgboost==2.0.2
+numpy==1.24.3
+pandas==2.1.3
+
+# Deep Learning (Optional - for LSTM)
+# tensorflow==2.15.0
+# keras==2.15.0
+
+# Data Processing
+joblib==1.3.2
+scipy==1.11.4
+
+# API & CORS
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-dotenv==1.0.0
+
+# Utilities
+python-dateutil==2.8.2
+pytz==2023.3
+
+# Development
+pytest==7.4.3
+httpx==0.25.2
