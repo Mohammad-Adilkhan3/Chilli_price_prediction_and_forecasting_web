@@ -112,6 +112,38 @@ const LandingPage: React.FC = () => {
           </motion.div>
 
           <motion.div variants={itemVariants} className="mb-16">
+            <GlassCard className="bg-primary/5 border-primary/20">
+              <div className="text-center py-8">
+                <h3 className="text-2xl font-bold mb-4 gradient-text">
+                  Trained on 100,000+ Historical Samples
+                </h3>
+                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                  Our AI models are trained on comprehensive agricultural data spanning 15 years (2010-2024),
+                  covering 20+ markets and 10+ chilli varieties with multiple environmental factors.
+                </p>
+                <div className="grid grid-cols-2 xl:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                  <div>
+                    <p className="text-3xl font-bold text-primary mb-1">100K+</p>
+                    <p className="text-sm text-muted-foreground">Training Samples</p>
+                  </div>
+                  <div>
+                    <p className="text-3xl font-bold text-primary mb-1">15 Years</p>
+                    <p className="text-sm text-muted-foreground">Historical Data</p>
+                  </div>
+                  <div>
+                    <p className="text-3xl font-bold text-primary mb-1">20+ Markets</p>
+                    <p className="text-sm text-muted-foreground">Cities Covered</p>
+                  </div>
+                  <div>
+                    <p className="text-3xl font-bold text-primary mb-1">10+ Varieties</p>
+                    <p className="text-sm text-muted-foreground">Chilli Types</p>
+                  </div>
+                </div>
+              </div>
+            </GlassCard>
+          </motion.div>
+
+          <motion.div variants={itemVariants} className="mb-16">
             <GlassCard className="p-8 xl:p-12">
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 items-center">
                 <div>

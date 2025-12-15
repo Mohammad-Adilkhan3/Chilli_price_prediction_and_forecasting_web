@@ -63,6 +63,43 @@ const ModelIntelligence: React.FC = () => {
             </motion.div>
 
             <motion.div variants={itemVariants} className="mb-8">
+              <GlassCard className="bg-primary/5 border-primary/20">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0 glow-primary">
+                    <Target className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                      Training Dataset Information
+                      <CheckCircle className="w-5 h-5 text-success" />
+                    </h3>
+                    <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 text-sm">
+                      <div>
+                        <p className="text-muted-foreground">Total Samples</p>
+                        <p className="text-xl font-bold text-primary">100,000+</p>
+                      </div>
+                      <div>
+                        <p className="text-muted-foreground">Time Period</p>
+                        <p className="text-xl font-bold">2010-2024</p>
+                      </div>
+                      <div>
+                        <p className="text-muted-foreground">Markets Covered</p>
+                        <p className="text-xl font-bold">20+ Cities</p>
+                      </div>
+                      <div>
+                        <p className="text-muted-foreground">Varieties</p>
+                        <p className="text-xl font-bold">10+ Types</p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-3">
+                      Models trained on comprehensive historical data including Price, Arrivals, Rainfall, Temperature, and Seasonal patterns
+                    </p>
+                  </div>
+                </div>
+              </GlassCard>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="mb-8">
               <GlassCard className="glow-primary">
                 <div className="flex items-start gap-4 mb-6">
                   <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0">

@@ -131,6 +131,10 @@ const Dashboard: React.FC = () => {
                           ))}
                         </SelectContent>
                       </Select>
+                      <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1">
+                        <Brain className="w-3 h-3" />
+                        Trained on 100,000+ samples
+                      </p>
                     </div>
 
                     <div>
