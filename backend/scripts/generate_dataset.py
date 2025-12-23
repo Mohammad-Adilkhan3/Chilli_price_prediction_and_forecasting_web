@@ -1,6 +1,7 @@
 """
 Generate Sample Agricultural Dataset
-Creates 100,000+ sample records for model training
+Creates 500,000+ sample records for model training
+High-quality dataset with comprehensive coverage of all scenarios
 """
 import pandas as pd
 import numpy as np
@@ -9,7 +10,7 @@ import random
 from pathlib import Path
 
 # Configuration
-NUM_SAMPLES = 100000
+NUM_SAMPLES = 500000  # Increased from 100,000 to 500,000 for better model training
 START_DATE = datetime(2010, 1, 1)
 END_DATE = datetime(2024, 12, 31)
 

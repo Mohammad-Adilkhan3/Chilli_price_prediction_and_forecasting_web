@@ -1,6 +1,7 @@
 """
 Train Machine Learning Models
 Trains Random Forest, XGBoost, and Linear Regression models
+Enhanced for 500,000+ training samples with optimized hyperparameters
 """
 import pandas as pd
 import numpy as np
@@ -83,16 +84,19 @@ class ModelTrainer:
     return self
   
   def train_random_forest(self):
-    """Train Random Forest model"""
+    """Train Random Forest model with enhanced parameters for 500K+ samples"""
     print("\n🌲 Training Random Forest...")
+    print("  Using 200 estimators for better accuracy with large dataset...")
     
     model = RandomForestRegressor(
-      n_estimators=100,
-      max_depth=20,
+      n_estimators=200,      # Increased from 100 to 200 for better accuracy
+      max_depth=25,          # Increased from 20 to 25 for deeper trees
       min_samples_split=5,
       min_samples_leaf=2,
+      max_features='sqrt',   # Added for better generalization
       random_state=42,
-      n_jobs=-1
+      n_jobs=-1,
+      verbose=1              # Show progress during training
     )
     
     model.fit(self.X_train, self.y_train)
@@ -107,15 +111,19 @@ class ModelTrainer:
     return self
   
   def train_xgboost(self):
-    """Train XGBoost model"""
+    """Train XGBoost model with enhanced parameters for 500K+ samples"""
     print("\n🚀 Training XGBoost...")
+    print("  Using 200 estimators for better accuracy with large dataset...")
     
     model = XGBRegressor(
-      n_estimators=100,
-      max_depth=10,
+      n_estimators=200,      # Increased from 100 to 200
+      max_depth=12,          # Increased from 10 to 12 for deeper trees
       learning_rate=0.1,
+      subsample=0.8,         # Added for better generalization
+      colsample_bytree=0.8,  # Added for better generalization
       random_state=42,
-      n_jobs=-1
+      n_jobs=-1,
+      verbosity=1            # Show progress during training
     )
     
     model.fit(self.X_train, self.y_train)
@@ -229,6 +237,7 @@ def main():
   
   print("=" * 60)
   print("AgriAI Model Training Pipeline")
+  print("Enhanced Training with 500,000+ Samples")
   print("=" * 60)
   print()
   

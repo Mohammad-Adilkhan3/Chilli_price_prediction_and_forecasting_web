@@ -9,7 +9,7 @@ This is the **backend API** for the AgriAI Agricultural Price Intelligence Platf
 - 🔍 **AI Insights** - Market analysis and risk alerts
 - 📈 **Model Performance** - Track accuracy and metrics
 
-**Trained on 100,000+ historical samples** (2010-2024)
+**Trained on 500,000+ historical samples** (2010-2024) with enhanced hyperparameters for maximum accuracy
 
 ---
 
@@ -67,10 +67,13 @@ pip install -r requirements.txt
 ### Step 2: Generate Dataset & Train Models
 
 ```bash
-# Generate 100,000+ sample dataset
+# Generate 500,000+ sample dataset (takes 2-3 minutes)
 python scripts/generate_dataset.py
 
-# Train ML models (Random Forest, XGBoost, Linear Regression)
+# Train ML models with enhanced hyperparameters (takes 5-10 minutes)
+# - Random Forest: 200 estimators, max_depth=25
+# - XGBoost: 200 estimators, max_depth=12
+# - Linear Regression: Ridge regularization
 python scripts/train_models.py
 ```
 
