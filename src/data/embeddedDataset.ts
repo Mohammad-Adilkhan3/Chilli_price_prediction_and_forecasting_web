@@ -154,8 +154,8 @@ export const datasetStats = {
   cities: Array.from(new Set(agriculturalDataset.map(d => d.city))).sort(),
   varieties: Array.from(new Set(agriculturalDataset.map(d => d.variety))).sort(),
   priceRange: {
-    min: Math.min(...agriculturalDataset.map(d => d.price)),
-    max: Math.max(...agriculturalDataset.map(d => d.price)),
+    min: agriculturalDataset.reduce((min, d) => d.price < min ? d.price : min, Infinity),
+    max: agriculturalDataset.reduce((max, d) => d.price > max ? d.price : max, -Infinity),
     avg: agriculturalDataset.reduce((sum, d) => sum + d.price, 0) / agriculturalDataset.length
   }
 };
