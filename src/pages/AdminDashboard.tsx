@@ -62,15 +62,19 @@ export default function AdminDashboard() {
   const [datasetStatus, setDatasetStatus] = useState<DatasetStatus | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [uploadingFile, setUploadingFile] = useState(false);
+  const [backendConnected, setBackendConnected] = useState(true);
 
   // Fetch model info
   const fetchModelInfo = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/admin/model-info`);
+      if (!response.ok) throw new Error('Failed to fetch model info');
       const data = await response.json();
       setModelInfo(data);
+      setBackendConnected(true);
     } catch (error) {
       console.error('Error fetching model info:', error);
+      setBackendConnected(false);
     }
   };
 
@@ -131,8 +135,14 @@ export default function AdminDashboard() {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.detail || 'Failed to start dataset generation');
+        let errorMessage = 'Failed to start dataset generation';
+        try {
+          const error = await response.json();
+          errorMessage = error.detail || errorMessage;
+        } catch {
+          errorMessage = `Server returned ${response.status}: ${response.statusText}`;
+        }
+        throw new Error(errorMessage);
       }
 
       toast({
@@ -143,9 +153,19 @@ export default function AdminDashboard() {
       // Start polling
       fetchDatasetStatus();
     } catch (error: any) {
+      console.error('Generate dataset error:', error);
+      
+      let errorMessage = error.message;
+      
+      // Check for network errors
+      if (error.message === 'Failed to fetch' || error.name === 'TypeError') {
+        errorMessage = 'Cannot connect to backend server. Please ensure the backend is running at ' + API_BASE_URL;
+        setBackendConnected(false);
+      }
+      
       toast({
         title: 'Error',
-        description: error.message,
+        description: errorMessage,
         variant: 'destructive'
       });
     }
@@ -159,8 +179,14 @@ export default function AdminDashboard() {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.detail || 'Failed to start training');
+        let errorMessage = 'Failed to start training';
+        try {
+          const error = await response.json();
+          errorMessage = error.detail || errorMessage;
+        } catch {
+          errorMessage = `Server returned ${response.status}: ${response.statusText}`;
+        }
+        throw new Error(errorMessage);
       }
 
       toast({
@@ -171,9 +197,19 @@ export default function AdminDashboard() {
       // Start polling
       fetchTrainingStatus();
     } catch (error: any) {
+      console.error('Train models error:', error);
+      
+      let errorMessage = error.message;
+      
+      // Check for network errors
+      if (error.message === 'Failed to fetch' || error.name === 'TypeError') {
+        errorMessage = 'Cannot connect to backend server. Please ensure the backend is running at ' + API_BASE_URL;
+        setBackendConnected(false);
+      }
+      
       toast({
         title: 'Error',
-        description: error.message,
+        description: errorMessage,
         variant: 'destructive'
       });
     }
@@ -205,8 +241,14 @@ export default function AdminDashboard() {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.detail || 'Upload failed');
+        let errorMessage = 'Upload failed';
+        try {
+          const error = await response.json();
+          errorMessage = error.detail || errorMessage;
+        } catch {
+          errorMessage = `Server returned ${response.status}: ${response.statusText}`;
+        }
+        throw new Error(errorMessage);
       }
 
       const result = await response.json();
@@ -216,11 +258,22 @@ export default function AdminDashboard() {
         description: `${result.filename} (${result.size}) uploaded successfully`,
       });
 
+      setBackendConnected(true);
       fetchModelInfo();
     } catch (error: any) {
+      console.error('Upload error:', error);
+      
+      let errorMessage = error.message;
+      
+      // Check for network errors
+      if (error.message === 'Failed to fetch' || error.name === 'TypeError') {
+        errorMessage = 'Cannot connect to backend server. Please ensure the backend is running at ' + API_BASE_URL;
+        setBackendConnected(false);
+      }
+      
       toast({
         title: 'Upload Failed',
-        description: error.message,
+        description: errorMessage,
         variant: 'destructive'
       });
     } finally {
@@ -313,6 +366,22 @@ export default function AdminDashboard() {
             Manage datasets and train ML models
           </p>
         </div>
+
+        {/* Backend Connection Warning */}
+        {!backendConnected && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>
+              <p className="font-medium">Cannot connect to backend server</p>
+              <p className="text-sm mt-1">
+                Please ensure the backend is running at <code className="bg-destructive/20 px-1 py-0.5 rounded">{API_BASE_URL}</code>
+              </p>
+              <p className="text-sm mt-2">
+                To start the backend: <code className="bg-destructive/20 px-1 py-0.5 rounded">cd backend && python -m app.main</code>
+              </p>
+            </AlertDescription>
+          </Alert>
+        )}
 
         {/* Dataset Status */}
         {datasetStatus?.is_generating && (
