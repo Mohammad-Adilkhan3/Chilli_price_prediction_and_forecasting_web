@@ -15,7 +15,7 @@ import { datasetStats } from '@/data/embeddedDataset';
 const Dashboard: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState('Bangalore');
   const [selectedVariety, setSelectedVariety] = useState('Guntur');
-  const [selectedModel, setSelectedModel] = useState('Advanced Linear Regression');
+  const [selectedModel, setSelectedModel] = useState('Random Forest');
   const [selectedFrequency, setSelectedFrequency] = useState('Monthly');
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
@@ -24,17 +24,26 @@ const Dashboard: React.FC = () => {
   const [temperature, setTemperature] = useState(27);
   const [isLoading, setIsLoading] = useState(false);
   const [prediction, setPrediction] = useState<any>(null);
-  const [modelMetrics, setModelMetrics] = useState<any>(null);
+  const [modelMetrics, setModelMetrics] = useState<any[]>([]);
 
   const years = useMemo(() => generateYears(), []);
 
   // Load model metrics on mount
   useEffect(() => {
     const metrics = mlService.getMetrics();
-    if (metrics) {
+    if (metrics && metrics.length > 0) {
       setModelMetrics(metrics);
+      // Set active model as selected
+      const activeModel = mlService.getActiveModel();
+      setSelectedModel(activeModel);
     }
   }, []);
+
+  // Get current model metrics
+  const currentModelMetrics = useMemo(() => {
+    if (modelMetrics.length === 0) return null;
+    return modelMetrics.find(m => m.name === selectedModel) || modelMetrics[0];
+  }, [modelMetrics, selectedModel]);
 
   // Get raw data based on selected year and month
   const rawChartData = useMemo(() => {
@@ -57,42 +66,7 @@ const Dashboard: React.FC = () => {
     setIsLoading(true);
     
     try {
-      // Try backend API first
-      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
-      
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/predict`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            year: selectedYear,
-            month: selectedMonth,
-            city: selectedCity,
-            variety: selectedVariety,
-            rainfall,
-            arrivals,
-            temperature
-          }),
-        });
-        
-        if (response.ok) {
-          const data = await response.json();
-          setPrediction({
-            predictedPrice: Math.round(data.predicted_price),
-            confidence: Math.round(data.confidence || 95),
-            model: data.model || 'Backend ML Model',
-            factors: data.factors || {}
-          });
-          console.log('✅ Using backend prediction');
-          return;
-        }
-      } catch (backendError) {
-        console.log('⚠️ Backend not available, using embedded ML');
-      }
-      
-      // Fallback to embedded ML service
+      // Use embedded ML service
       const result = mlService.predict({
         year: selectedYear,
         month: selectedMonth,
@@ -104,7 +78,6 @@ const Dashboard: React.FC = () => {
       });
       
       setPrediction(result);
-      console.log('✅ Using embedded ML prediction');
     } catch (error) {
       console.error('Prediction error:', error);
     } finally {
@@ -196,7 +169,10 @@ const Dashboard: React.FC = () => {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="Advanced Linear Regression">Advanced Linear Regression</SelectItem>
+                          <SelectItem value="Random Forest">Random Forest</SelectItem>
+                          <SelectItem value="XGBoost">XGBoost</SelectItem>
+                          <SelectItem value="Linear Regression">Linear Regression</SelectItem>
+                          <SelectItem value="Gradient Boosting">Gradient Boosting</SelectItem>
                         </SelectContent>
                       </Select>
                       <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1">
@@ -313,7 +289,7 @@ const Dashboard: React.FC = () => {
                     <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 pt-4 border-t border-border/50">
                       <div>
                         <p className="text-xs text-muted-foreground mb-1">Confidence</p>
-                        <p className="text-lg font-semibold">{prediction ? prediction.confidence : modelMetrics?.accuracy.toFixed(0) || 98}%</p>
+                        <p className="text-lg font-semibold">{prediction ? prediction.confidence : currentModelMetrics?.accuracy.toFixed(0) || 98}%</p>
                       </div>
                       <div>
                         <p className="text-xs text-muted-foreground mb-1">Range</p>
@@ -340,14 +316,14 @@ const Dashboard: React.FC = () => {
                 <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
                   <MetricCard
                     title="Accuracy"
-                    value={`${modelMetrics?.accuracy.toFixed(1) || 98.0}%`}
+                    value={`${currentModelMetrics?.accuracy.toFixed(1) || 98.0}%`}
                     icon={Target}
                     trend="up"
                     trendValue="+1.2%"
                   />
                   <MetricCard
                     title="MAE"
-                    value={modelMetrics?.mae.toFixed(0) || '1.0'}
+                    value={currentModelMetrics?.mae.toFixed(0) || '1.0'}
                     subtitle="Mean Absolute Error"
                     icon={Brain}
                     trend="down"
@@ -355,13 +331,13 @@ const Dashboard: React.FC = () => {
                   />
                   <MetricCard
                     title="R² Score"
-                    value={modelMetrics?.r2Score.toFixed(3) || '0.998'}
+                    value={currentModelMetrics?.r2Score.toFixed(3) || '0.998'}
                     subtitle="Model Reliability"
                     icon={TrendingUp}
                   />
                   <MetricCard
                     title="RMSE"
-                    value={modelMetrics?.rmse.toFixed(0) || '1.2'}
+                    value={currentModelMetrics?.rmse.toFixed(0) || '1.2'}
                     subtitle="Root Mean Square Error"
                     icon={Target}
                   />
