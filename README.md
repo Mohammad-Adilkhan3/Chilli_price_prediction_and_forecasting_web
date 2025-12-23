@@ -1,6 +1,74 @@
-# Welcome to Your Miaoda Project
+# AgriAI - AI-Driven Agricultural Intelligence Platform
 
-## Project Info
+## 🚀 Quick Start
+
+### Frontend (Web App)
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Access at: http://localhost:5173
+```
+
+### Backend (API Server)
+```bash
+cd backend
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Generate dataset (500,000 samples - takes 2-3 minutes)
+python scripts/generate_dataset.py
+
+# Train models (takes 10-15 minutes)
+python scripts/train_models.py
+
+# Start API server
+python -m app.main
+
+# Access at: http://localhost:8000
+# API Docs: http://localhost:8000/docs
+```
+
+## 🎯 Features
+
+### Web Interface
+- **Landing Page**: AI-powered agricultural price intelligence
+- **AI Dashboard**: Real-time price predictions with interactive controls
+- **AI Insights**: Market analysis and risk alerts
+- **AI Assistant**: Conversational AI for market questions
+- **Advanced Charts**: Interactive visualizations with scenario analysis
+- **Model Intelligence**: ML model performance and explainability
+- **Admin Dashboard**: Dataset management and model training (NEW!)
+
+### Admin Dashboard (NEW!)
+Manage datasets and train models from the web interface:
+- ✅ Generate 500,000 sample dataset with one click
+- ✅ Upload custom CSV datasets
+- ✅ Train all ML models (Random Forest, XGBoost, Linear Regression)
+- ✅ Real-time progress tracking
+- ✅ View model status and performance
+- ✅ Delete and manage files
+
+**Access**: http://localhost:5173/admin
+
+See [ADMIN_DASHBOARD_GUIDE.md](./ADMIN_DASHBOARD_GUIDE.md) for detailed instructions.
+
+### Backend API
+- **ML Models**: Random Forest (98.5%+ accuracy), XGBoost, Linear Regression
+- **Price Prediction**: Predict chilli prices based on market conditions
+- **AI Insights**: Generate market analysis and recommendations
+- **Model Performance**: Track accuracy, MAE, R² scores
+- **Admin APIs**: Dataset upload, model training, status tracking
+
+## 📋 Project Info
 
 ## Project Directory
 

@@ -5,6 +5,7 @@ import AIInsights from './pages/AIInsights';
 import AIChat from './pages/AIChat';
 import AdvancedCharts from './pages/AdvancedCharts';
 import ModelIntelligence from './pages/ModelIntelligence';
+import AdminDashboard from './pages/AdminDashboard';
 
 interface RouteConfig {
   name: string;
@@ -48,6 +49,12 @@ const routes: RouteConfig[] = [
     name: 'Model Intelligence',
     path: '/models',
     element: <ModelIntelligence />,
+    visible: true
+  },
+  {
+    name: 'Admin',
+    path: '/admin',
+    element: <AdminDashboard />,
     visible: true
   }
 ];

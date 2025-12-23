@@ -16,6 +16,7 @@ from app.models import (
   HealthResponse
 )
 from app.ml_models import model_manager
+from app.admin_routes import router as admin_router
 
 # Configure logging
 logging.basicConfig(
@@ -41,6 +42,9 @@ app.add_middleware(
   allow_methods=["*"],
   allow_headers=["*"],
 )
+
+# Include admin routes
+app.include_router(admin_router)
 
 
 @app.get("/", tags=["Root"])
