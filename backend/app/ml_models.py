@@ -162,6 +162,9 @@ class ModelManager:
       logger.warning(f"Model {model_key} not loaded, using mock prediction")
       prediction = self._mock_prediction(month, arrivals, rainfall)
     
+    # Validate prediction range
+    prediction = self._validate_prediction(prediction, variety)
+    
     # Get model performance metrics
     performance = self.model_performance.get(model_key, {
       "accuracy": 95.0,
@@ -199,6 +202,38 @@ class ModelManager:
     price = base_price * (1 + seasonal_factor + arrivals_factor + rainfall_factor + random_factor)
     
     return max(price, 25000)  # Minimum price floor
+  
+  def _validate_prediction(self, prediction: float, variety: str) -> float:
+    """Validate and correct prediction if out of expected range"""
+    
+    # Expected price ranges for each variety (₹ per quintal)
+    expected_ranges = {
+      "Guntur": (25000, 32000),
+      "Byadgi": (28000, 37000),
+      "Teja": (26000, 35000),
+      "Sannam": (24000, 30000),
+      "Kashmiri": (31000, 40000),
+      "Warangal": (24000, 31000)
+    }
+    
+    # Get expected range for variety
+    min_price, max_price = expected_ranges.get(variety, (25000, 40000))
+    
+    # Check if prediction is out of range
+    if prediction < min_price:
+      logger.warning(
+        f"Prediction ₹{prediction:.2f} below minimum for {variety}. "
+        f"Adjusting to ₹{min_price:.2f}"
+      )
+      return min_price
+    elif prediction > max_price:
+      logger.warning(
+        f"Prediction ₹{prediction:.2f} above maximum for {variety}. "
+        f"Adjusting to ₹{max_price:.2f}"
+      )
+      return max_price
+    
+    return prediction
   
   def get_model_performance(self, model_key: str) -> Dict[str, float]:
     """Get performance metrics for a specific model"""

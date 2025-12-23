@@ -13,6 +13,36 @@ This is the **backend API** for the AgriAI Agricultural Price Intelligence Platf
 
 ---
 
+## ⚠️ Important: Price Range Verification
+
+**Expected Price Ranges:**
+- Guntur: ₹25,000 - ₹32,000 (typical: ₹27,000 - ₹31,000)
+- Byadgi: ₹28,000 - ₹37,000
+- Teja: ₹26,000 - ₹35,000
+- Sannam: ₹24,000 - ₹30,000
+- Kashmiri: ₹31,000 - ₹40,000
+- Warangal: ₹24,000 - ₹31,000
+
+**If you see prices around ₹23,000-₹24,000**, you have old model files. Run:
+
+```bash
+cd backend
+./clean_and_retrain.sh
+```
+
+This will remove old models and retrain with correct price ranges.
+
+**To verify predictions are correct:**
+
+```bash
+cd backend
+python test_predictions.py
+```
+
+See `PRICE_VERIFICATION.md` for detailed information.
+
+---
+
 ## 🚀 Quick Start (3 Steps)
 
 ### Step 1: Install Dependencies
