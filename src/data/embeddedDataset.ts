@@ -26,8 +26,15 @@ export interface DataPoint {
 // Generate comprehensive dataset with realistic patterns
 function generateDataset(): DataPoint[] {
   const data: DataPoint[] = [];
-  const cities = ['Bangalore', 'Mumbai', 'Delhi', 'Chennai', 'Kolkata', 'Hyderabad', 'Pune', 'Ahmedabad'];
-  const varieties = ['Guntur', 'Teja', 'Byadgi', 'Kashmiri', 'Sannam', 'Wonder Hot'];
+  const cities = [
+    'Bangalore', 'Mumbai', 'Delhi', 'Chennai', 'Kolkata', 'Hyderabad', 'Pune', 'Ahmedabad',
+    'Jaipur', 'Lucknow', 'Kanpur', 'Nagpur', 'Indore', 'Bhopal', 'Visakhapatnam', 'Patna',
+    'Vadodara', 'Ludhiana', 'Agra', 'Nashik', 'Faridabad', 'Meerut', 'Rajkot', 'Varanasi'
+  ];
+  const varieties = [
+    'Guntur', 'Teja', 'Byadgi', 'Kashmiri', 'Sannam', 'Wonder Hot',
+    'Pusa Jwala', 'Bhut Jolokia', 'Kanthari', 'Dhani', 'Reshampatti', 'Ellachipur'
+  ];
   
   // Generate data from 2010 to 2025
   for (let year = 2010; year <= 2025; year++) {
@@ -66,18 +73,24 @@ function generateDataset(): DataPoint[] {
           basePrice += (3500 - arrivals) * 3;
           
           // Variety premium
-          const varietyPremium = {
+          const varietyPremium: Record<string, number> = {
             'Guntur': 1.0,
             'Teja': 1.15,
             'Byadgi': 1.1,
             'Kashmiri': 1.25,
             'Sannam': 0.95,
-            'Wonder Hot': 1.05
+            'Wonder Hot': 1.05,
+            'Pusa Jwala': 1.08,
+            'Bhut Jolokia': 1.30,
+            'Kanthari': 1.12,
+            'Dhani': 0.98,
+            'Reshampatti': 1.06,
+            'Ellachipur': 1.03
           };
-          basePrice *= varietyPremium[variety as keyof typeof varietyPremium];
+          basePrice *= varietyPremium[variety] || 1.0;
           
           // City factor
-          const cityFactor = {
+          const cityFactor: Record<string, number> = {
             'Bangalore': 1.05,
             'Mumbai': 1.1,
             'Delhi': 1.08,
@@ -85,15 +98,31 @@ function generateDataset(): DataPoint[] {
             'Kolkata': 0.98,
             'Hyderabad': 1.02,
             'Pune': 1.06,
-            'Ahmedabad': 1.04
+            'Ahmedabad': 1.04,
+            'Jaipur': 1.03,
+            'Lucknow': 0.97,
+            'Kanpur': 0.96,
+            'Nagpur': 1.01,
+            'Indore': 1.02,
+            'Bhopal': 0.99,
+            'Visakhapatnam': 1.04,
+            'Patna': 0.95,
+            'Vadodara': 1.03,
+            'Ludhiana': 1.07,
+            'Agra': 0.98,
+            'Nashik': 1.01,
+            'Faridabad': 1.05,
+            'Meerut': 0.97,
+            'Rajkot': 1.02,
+            'Varanasi': 0.96
           };
-          basePrice *= cityFactor[city as keyof typeof cityFactor];
+          basePrice *= cityFactor[city] || 1.0;
           
           // Add random variation
           const price = basePrice + (Math.random() - 0.5) * 3000;
           
           // Only add some samples to keep dataset manageable
-          if (Math.random() < 0.15) {  // 15% sampling
+          if (Math.random() < 0.08) {  // 8% sampling to get ~24K samples
             data.push({
               year,
               month,

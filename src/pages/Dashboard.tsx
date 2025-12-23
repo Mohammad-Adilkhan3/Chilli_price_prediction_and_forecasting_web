@@ -67,7 +67,8 @@ const Dashboard: React.FC = () => {
         year: selectedYear,
         month: selectedMonth,
         city: selectedCity,
-        variety: selectedVariety
+        variety: selectedVariety,
+        frequency: selectedFrequency as 'Weekly' | 'Monthly' | 'Yearly'
       });
       
       setPrediction(result);
