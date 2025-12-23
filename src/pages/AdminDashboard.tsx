@@ -367,7 +367,7 @@ export default function AdminDashboard() {
           </p>
         </div>
 
-        {/* Backend Connection Warning */}
+        {/* Backend Connection Status */}
         {!backendConnected && (
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
@@ -377,7 +377,19 @@ export default function AdminDashboard() {
                 Please ensure the backend is running at <code className="bg-destructive/20 px-1 py-0.5 rounded">{API_BASE_URL}</code>
               </p>
               <p className="text-sm mt-2">
-                To start the backend: <code className="bg-destructive/20 px-1 py-0.5 rounded">cd backend && python -m app.main</code>
+                To start the backend: <code className="bg-destructive/20 px-1 py-0.5 rounded">cd backend && python quick_start.py</code>
+              </p>
+            </AlertDescription>
+          </Alert>
+        )}
+        
+        {backendConnected && modelInfo && (
+          <Alert className="border-green-500/50 bg-green-500/10">
+            <CheckCircle className="h-4 w-4 text-green-500" />
+            <AlertDescription>
+              <p className="font-medium text-green-700 dark:text-green-400">Backend server connected successfully</p>
+              <p className="text-sm mt-1 text-green-600 dark:text-green-500">
+                API endpoint: <code className="bg-green-500/20 px-1 py-0.5 rounded">{API_BASE_URL}</code>
               </p>
             </AlertDescription>
           </Alert>
