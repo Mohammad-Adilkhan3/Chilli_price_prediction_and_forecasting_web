@@ -5,8 +5,7 @@ import { Button } from '@/components/ui/button';
 import { GlassCard } from '@/components/ui/glass-card';
 import { MetricCard } from '@/components/ui/metric-card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import { TrendingUp, TrendingDown, Target, Brain, Droplets, Package } from 'lucide-react';
+import { TrendingUp, TrendingDown, Target, Brain } from 'lucide-react';
 import PageMeta from '@/components/common/PageMeta';
 import { generateDataForYearMonth, modelPerformanceData, cities, varieties, models, frequencies, generateYears, months, sampleDataForDisplay } from '@/utils/mockData';
 import mlService from '@/services/mlService';
@@ -19,9 +18,6 @@ const Dashboard: React.FC = () => {
   const [selectedFrequency, setSelectedFrequency] = useState('Monthly');
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
-  const [rainfall, setRainfall] = useState(75);
-  const [arrivals, setArrivals] = useState(2500);
-  const [temperature, setTemperature] = useState(27);
   const [isLoading, setIsLoading] = useState(false);
   const [prediction, setPrediction] = useState<any>(null);
   const [modelMetrics, setModelMetrics] = useState<any[]>([]);
@@ -66,15 +62,12 @@ const Dashboard: React.FC = () => {
     setIsLoading(true);
     
     try {
-      // Use embedded ML service
+      // Use embedded ML service with automatic parameter calculation
       const result = mlService.predict({
         year: selectedYear,
         month: selectedMonth,
         city: selectedCity,
-        variety: selectedVariety,
-        rainfall,
-        arrivals,
-        temperature
+        variety: selectedVariety
       });
       
       setPrediction(result);
@@ -209,50 +202,6 @@ const Dashboard: React.FC = () => {
                           </SelectContent>
                         </Select>
                       </div>
-                    </div>
-
-                    <div>
-                      <label className="text-sm text-muted-foreground mb-2 flex items-center gap-1">
-                        <Droplets className="w-3 h-3" />
-                        Rainfall (mm)
-                      </label>
-                      <Input
-                        type="number"
-                        value={rainfall}
-                        onChange={(e) => setRainfall(Number(e.target.value))}
-                        min="0"
-                        max="300"
-                        placeholder="75"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-sm text-muted-foreground mb-2 flex items-center gap-1">
-                        <Package className="w-3 h-3" />
-                        Arrivals (quintals)
-                      </label>
-                      <Input
-                        type="number"
-                        value={arrivals}
-                        onChange={(e) => setArrivals(Number(e.target.value))}
-                        min="500"
-                        max="5000"
-                        placeholder="2500"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-sm text-muted-foreground mb-2 block">
-                        Temperature (°C)
-                      </label>
-                      <Input
-                        type="number"
-                        value={temperature}
-                        onChange={(e) => setTemperature(Number(e.target.value))}
-                        min="15"
-                        max="40"
-                        placeholder="27"
-                      />
                     </div>
 
                     <Button
@@ -390,7 +339,7 @@ const Dashboard: React.FC = () => {
                 <motion.div variants={itemVariants} className="grid grid-cols-1 xl:grid-cols-2 gap-6">
                   <GlassCard>
                     <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                      <Droplets className="w-5 h-5 text-primary" />
+                      <TrendingDown className="w-5 h-5 text-primary" />
                       Rainfall Impact
                     </h3>
                     <ResponsiveContainer width="100%" height={250}>
@@ -422,7 +371,7 @@ const Dashboard: React.FC = () => {
 
                   <GlassCard>
                     <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                      <Package className="w-5 h-5 text-secondary" />
+                      <Target className="w-5 h-5 text-secondary" />
                       Market Arrivals
                     </h3>
                     <ResponsiveContainer width="100%" height={250}>
