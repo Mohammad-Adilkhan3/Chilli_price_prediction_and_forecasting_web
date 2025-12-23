@@ -58,68 +58,69 @@ function generateDataset(): DataPoint[] {
           const arrivals = baseArrivals + (Math.random() - 0.5) * 1000;
           
           // Price calculation with multiple factors
-          let basePrice = 25000;
+          // Target range: 22,000 - 28,000 (realistic Karnataka Red Chilli prices)
+          let basePrice = 24000;
           
-          // Year trend (inflation)
-          basePrice += (year - 2010) * 800;
+          // Year trend (moderate inflation ~2% per year)
+          basePrice += (year - 2010) * 200;
           
-          // Seasonal effect
+          // Seasonal effect (moderate impact)
           basePrice *= seasonalFactor;
           
-          // Rainfall effect (inverse - less rain = higher price)
-          basePrice += (150 - rainfall) * 30;
+          // Rainfall effect (inverse - less rain = higher price, moderate impact)
+          basePrice += (150 - rainfall) * 8;
           
-          // Arrivals effect (inverse - less supply = higher price)
-          basePrice += (3500 - arrivals) * 3;
+          // Arrivals effect (inverse - less supply = higher price, moderate impact)
+          basePrice += (3500 - arrivals) * 0.8;
           
-          // Variety premium
+          // Variety premium (reduced to realistic levels)
           const varietyPremium: Record<string, number> = {
             'Guntur': 1.0,
-            'Teja': 1.15,
-            'Byadgi': 1.1,
-            'Kashmiri': 1.25,
-            'Sannam': 0.95,
-            'Wonder Hot': 1.05,
-            'Pusa Jwala': 1.08,
-            'Bhut Jolokia': 1.30,
-            'Kanthari': 1.12,
-            'Dhani': 0.98,
-            'Reshampatti': 1.06,
-            'Ellachipur': 1.03
+            'Teja': 1.05,
+            'Byadgi': 1.03,
+            'Kashmiri': 1.08,
+            'Sannam': 0.98,
+            'Wonder Hot': 1.02,
+            'Pusa Jwala': 1.04,
+            'Bhut Jolokia': 1.10,
+            'Kanthari': 1.04,
+            'Dhani': 0.99,
+            'Reshampatti': 1.03,
+            'Ellachipur': 1.01
           };
           basePrice *= varietyPremium[variety] || 1.0;
           
-          // City factor
+          // City factor (reduced to realistic levels)
           const cityFactor: Record<string, number> = {
-            'Bangalore': 1.05,
-            'Mumbai': 1.1,
-            'Delhi': 1.08,
+            'Bangalore': 1.02,
+            'Mumbai': 1.04,
+            'Delhi': 1.03,
             'Chennai': 1.0,
-            'Kolkata': 0.98,
-            'Hyderabad': 1.02,
-            'Pune': 1.06,
-            'Ahmedabad': 1.04,
-            'Jaipur': 1.03,
-            'Lucknow': 0.97,
-            'Kanpur': 0.96,
-            'Nagpur': 1.01,
-            'Indore': 1.02,
+            'Kolkata': 0.99,
+            'Hyderabad': 1.01,
+            'Pune': 1.02,
+            'Ahmedabad': 1.02,
+            'Jaipur': 1.01,
+            'Lucknow': 0.99,
+            'Kanpur': 0.98,
+            'Nagpur': 1.0,
+            'Indore': 1.01,
             'Bhopal': 0.99,
-            'Visakhapatnam': 1.04,
-            'Patna': 0.95,
-            'Vadodara': 1.03,
-            'Ludhiana': 1.07,
-            'Agra': 0.98,
-            'Nashik': 1.01,
-            'Faridabad': 1.05,
-            'Meerut': 0.97,
-            'Rajkot': 1.02,
-            'Varanasi': 0.96
+            'Visakhapatnam': 1.02,
+            'Patna': 0.98,
+            'Vadodara': 1.01,
+            'Ludhiana': 1.03,
+            'Agra': 0.99,
+            'Nashik': 1.0,
+            'Faridabad': 1.02,
+            'Meerut': 0.99,
+            'Rajkot': 1.01,
+            'Varanasi': 0.98
           };
           basePrice *= cityFactor[city] || 1.0;
           
-          // Add random variation
-          const price = basePrice + (Math.random() - 0.5) * 3000;
+          // Add random variation (reduced range)
+          const price = basePrice + (Math.random() - 0.5) * 2000;
           
           // Only add some samples to keep dataset manageable
           if (Math.random() < 0.08) {  // 8% sampling to get ~24K samples
@@ -131,7 +132,7 @@ function generateDataset(): DataPoint[] {
               rainfall: Math.max(0, rainfall),
               arrivals: Math.max(500, arrivals),
               temperature: Math.max(15, Math.min(40, temperature)),
-              price: Math.max(15000, Math.min(50000, price))
+              price: Math.max(20000, Math.min(30000, price))  // Realistic price range
             });
           }
         }

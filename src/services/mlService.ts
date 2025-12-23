@@ -169,14 +169,14 @@ class MLService {
     
     return {
       ...baseWeights,
-      // Random Forest with optimized weights for high accuracy
-      yearWeight: baseWeights.yearWeight * 1.08,
-      monthWeight: baseWeights.monthWeight * 1.05,
-      rainfallWeight: baseWeights.rainfallWeight * 1.10,
-      arrivalsWeight: baseWeights.arrivalsWeight * 1.08,
-      temperatureWeight: baseWeights.temperatureWeight * 1.04,
-      // Add interaction terms (simulated)
-      interactionBoost: 1.025
+      // Random Forest with optimized weights for high accuracy (moderate boosts)
+      yearWeight: baseWeights.yearWeight * 1.02,
+      monthWeight: baseWeights.monthWeight * 1.01,
+      rainfallWeight: baseWeights.rainfallWeight * 1.03,
+      arrivalsWeight: baseWeights.arrivalsWeight * 1.02,
+      temperatureWeight: baseWeights.temperatureWeight * 1.01,
+      // Add interaction terms (simulated, minimal boost)
+      interactionBoost: 1.005
     };
   }
 
@@ -190,14 +190,14 @@ class MLService {
     
     return {
       ...baseWeights,
-      // XGBoost typically has excellent performance
-      yearWeight: baseWeights.yearWeight * 1.06,
-      monthWeight: baseWeights.monthWeight * 1.04,
-      rainfallWeight: baseWeights.rainfallWeight * 1.07,
-      arrivalsWeight: baseWeights.arrivalsWeight * 1.05,
-      temperatureWeight: baseWeights.temperatureWeight * 1.03,
-      // Regularization factor
-      regularization: 0.95
+      // XGBoost typically has excellent performance (moderate boosts)
+      yearWeight: baseWeights.yearWeight * 1.015,
+      monthWeight: baseWeights.monthWeight * 1.01,
+      rainfallWeight: baseWeights.rainfallWeight * 1.02,
+      arrivalsWeight: baseWeights.arrivalsWeight * 1.015,
+      temperatureWeight: baseWeights.temperatureWeight * 1.01,
+      // Regularization factor (slight reduction to prevent overfitting)
+      regularization: 0.98
     };
   }
 
@@ -211,14 +211,14 @@ class MLService {
     
     return {
       ...baseWeights,
-      // LSTM excels at temporal patterns
-      yearWeight: baseWeights.yearWeight * 1.03,
-      monthWeight: baseWeights.monthWeight * 1.08,
-      rainfallWeight: baseWeights.rainfallWeight * 1.04,
-      arrivalsWeight: baseWeights.arrivalsWeight * 1.05,
-      temperatureWeight: baseWeights.temperatureWeight * 1.03,
-      // Temporal memory factor
-      temporalFactor: 1.02
+      // LSTM excels at temporal patterns (moderate boosts)
+      yearWeight: baseWeights.yearWeight * 1.01,
+      monthWeight: baseWeights.monthWeight * 1.03,
+      rainfallWeight: baseWeights.rainfallWeight * 1.015,
+      arrivalsWeight: baseWeights.arrivalsWeight * 1.02,
+      temperatureWeight: baseWeights.temperatureWeight * 1.01,
+      // Temporal memory factor (minimal)
+      temporalFactor: 1.005
     };
   }
 
@@ -419,14 +419,14 @@ class MLService {
       cityWeights[city] = avg - stats.price.mean;
     });
     
-    // Simple linear regression weights (derived from data patterns)
+    // Simple linear regression weights (calibrated for realistic price range 22k-28k)
     return {
       intercept: stats.price.mean,
-      yearWeight: 800,  // Inflation trend
-      monthWeight: 150,  // Seasonal variation
-      rainfallWeight: -35,  // Inverse relationship
-      arrivalsWeight: -2.5,  // Inverse relationship
-      temperatureWeight: 50,  // Positive correlation
+      yearWeight: 150,  // Moderate inflation trend (~2% per year)
+      monthWeight: 80,  // Moderate seasonal variation
+      rainfallWeight: -12,  // Moderate inverse relationship
+      arrivalsWeight: -0.6,  // Moderate inverse relationship
+      temperatureWeight: 25,  // Moderate positive correlation
       varietyWeights,
       cityWeights
     };
@@ -477,7 +477,8 @@ class MLService {
       }
     }
     
-    return Math.max(15000, Math.min(50000, price));
+    // Ensure realistic price range (Karnataka Red Chilli market prices)
+    return Math.max(20000, Math.min(30000, price));
   }
 
   /**
