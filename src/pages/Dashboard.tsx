@@ -57,7 +57,42 @@ const Dashboard: React.FC = () => {
     setIsLoading(true);
     
     try {
-      // Make prediction using ML service
+      // Try backend API first
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+      
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/predict`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            year: selectedYear,
+            month: selectedMonth,
+            city: selectedCity,
+            variety: selectedVariety,
+            rainfall,
+            arrivals,
+            temperature
+          }),
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          setPrediction({
+            predictedPrice: Math.round(data.predicted_price),
+            confidence: Math.round(data.confidence || 95),
+            model: data.model || 'Backend ML Model',
+            factors: data.factors || {}
+          });
+          console.log('✅ Using backend prediction');
+          return;
+        }
+      } catch (backendError) {
+        console.log('⚠️ Backend not available, using embedded ML');
+      }
+      
+      // Fallback to embedded ML service
       const result = mlService.predict({
         year: selectedYear,
         month: selectedMonth,
@@ -69,6 +104,7 @@ const Dashboard: React.FC = () => {
       });
       
       setPrediction(result);
+      console.log('✅ Using embedded ML prediction');
     } catch (error) {
       console.error('Prediction error:', error);
     } finally {

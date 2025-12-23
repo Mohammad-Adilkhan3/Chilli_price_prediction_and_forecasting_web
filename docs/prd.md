@@ -16,9 +16,10 @@ A professional AI-powered mobile application for agricultural price intelligence
 - Support custom dataset uploads via mobile file system
 - Train models on comprehensive historical data to ensure high prediction accuracy
 - Enable offline access to recent predictions and cached data
-- **Automatically sync and update when backend datasets are modified**
-- **Notify users of dataset updates and trigger model retraining**
-\n## 2. Technical Architecture
+- Automatically sync and update when backend datasets are modified
+- Notify users of dataset updates and trigger model retraining
+
+## 2. Technical Architecture
 \n### 2.1 Mobile Frontend Stack
 - **Framework**: React Native (cross-platform iOS/Android)
 - **Alternative**: Flutter (Dart-based cross-platform)
@@ -48,14 +49,14 @@ A professional AI-powered mobile application for agricultural price intelligence
 - Push notification system for price alerts and dataset updates
 - Optimized for low-bandwidth scenarios
 - Real-time dataset update detection and synchronization
-- **Code-based dataset deployment with automatic training pipeline**
+- Code-based dataset deployment with automatic training pipeline
 
 ## 3. Core Features & Screens
 
 ### 3.1 Splash Screen & Onboarding
 \n**Splash Screen**:\n- Animated app logo with AI pulse effect
 - Loading indicator for initial data sync
-- **Check for dataset updates on app launch**
+- Check for dataset updates on app launch
 \n**Onboarding Flow** (first-time users):
 - Swipeable tutorial screens explaining key features
 - Permission requests (storage access for file uploads, notifications)
@@ -71,16 +72,15 @@ A professional AI-powered mobile application for agricultural price intelligence
 - 'Run Prediction' card with icon\n- 'Upload Dataset' card with cloud icon
 - 'AI Assistant' card with chat icon
 - 'View Insights' card with lightbulb icon
-- **'Sync Dataset' card with refresh icon (manual sync trigger)**
+- 'Sync Dataset' card with refresh icon (manual sync trigger)
 
 **Key Metrics Display** (grid layout):
 - Prediction Accuracy card with circular progress indicator
 - MAE (Mean Absolute Error) value
 - R² Score visualization
-- Training dataset size badge (e.g., 'Trained on 100,000+ samples')
-- Last prediction timestamp
-- **Dataset version indicator (e.g., 'Dataset v2.3- Updated 2 hours ago')**
-- **Update status badge ('Up to date' or 'Update available')**
+- Training dataset size badge (e.g., 'Trained on 100,000+ samples')\n- Last prediction timestamp
+- Dataset version indicator (e.g., 'Dataset v2.3- Updated 2 hours ago')
+- Update status badge ('Up to date' or 'Update available')
 
 **Recent Predictions List**:
 - Scrollable list of recent predictions with swipe-to-delete
@@ -100,11 +100,12 @@ A professional AI-powered mobile application for agricultural price intelligence
 **Prediction Result Card** (appears after prediction):
 - Large animated ₹ value display with currency symbol
 - Confidence interval range (lower - upper bounds)
-- Trend indicator (↑↓) with color coding (green for up, red for down)\n- Prediction timestamp
+- Trend indicator (↑↓) with color coding (green for up, red for down)
+- Prediction timestamp
 - Selected year and month context display
 - 'Save Prediction' button (bookmark icon)
--'Share' button (share icon for exporting result)
-- **Dataset version used for prediction displayed at bottom**
+- 'Share' button (share icon for exporting result)
+- Dataset version used for prediction displayed at bottom
 
 **Interactive Charts** (swipeable tabs):
 - **Price Trend Chart**: Line chart showing historical and predicted prices (pinch-to-zoom, pan gestures)
@@ -139,9 +140,9 @@ A professional AI-powered mobile application for agricultural price intelligence
 - List of uploaded datasets with metadata (name, sample count, upload date, version)
 - Swipe-to-delete gesture for removing datasets
 - 'Set as Active' button to switch between datasets
-- **'Check for Updates' button to manually trigger sync**
-- **Auto-update toggle switch (enable/disable automatic dataset updates)**
-- **Last sync timestamp displayed for each dataset**
+- 'Check for Updates' button to manually trigger sync
+- Auto-update toggle switch (enable/disable automatic dataset updates)
+- Last sync timestamp displayed for each dataset
 
 ### 3.5 AI Insights Screen
 
@@ -183,8 +184,7 @@ A professional AI-powered mobile application for agricultural price intelligence
 \n**Chat History**:
 - Scrollable conversation history\n- 'Clear Chat' option in settings
 - Persistent chat sessions (saved locally)
-
-### 3.7 Advanced Charts Screen
+\n### 3.7 Advanced Charts Screen
 
 **Chart Gallery** (grid or list view):
 - Thumbnail previews of available charts
@@ -196,22 +196,23 @@ A professional AI-powered mobile application for agricultural price intelligence
 - Legend toggle for multi-series charts
 
 **Scenario Simulation** (bottom sheet):
-- Sliders for adjusting parameters:\n  - Rainfall adjustment (↑↓)\n  - Arrivals adjustment (↑ ↓)
-  - Temperature adjustment (↑ ↓)
+- Sliders for adjusting parameters:\n  - Rainfall adjustment (↑↓)
+  - Arrivals adjustment (↑↓)\n  - Temperature adjustment (↑↓)
 -'Apply Changes' button to update chart in real-time
--'Reset to Default' button\n
+- 'Reset to Default' button\n
 **Export Options**:
 - 'Save Chart as Image' button
 - 'Share Chart' button (exports as PNG or PDF)
 \n### 3.8 Model Intelligence Screen
 
 **Model Comparison Section**:
-- Horizontal scrollable cards showing each model (RandomForest, XGBoost, LSTM)\n- Each card displays:
+- Horizontal scrollable cards showing each model (RandomForest, XGBoost, LSTM)
+- Each card displays:
   - Model name with icon
   - Performance metrics (MAE, RMSE, R² Score)
   - 'Best Performer' badge on top model
   - Training date and sample size
-  - **Dataset version used for training**
+  - Dataset version used for training
 
 **Performance Metrics Table**:
 - Sortable table comparing models
@@ -224,7 +225,7 @@ A professional AI-powered mobile application for agricultural price intelligence
 **Model Training History**:
 - Timeline view showing training accuracy trends over time
 - Training dataset statistics (sample size, feature distribution)
-- **Retraining events triggered by dataset updates**
+- Retraining events triggered by dataset updates
 
 ### 3.9 Dataset Sync & Update Screen
 
@@ -240,7 +241,7 @@ A professional AI-powered mobile application for agricultural price intelligence
 - Shows changes in new dataset version:\n  - Sample count difference (e.g., '+5,000 new records')
   - Date range extension\n  - New markets or varieties added
   - Data quality improvements
--'View Changelog' button for detailed update notes
+- 'View Changelog' button for detailed update notes
 
 **Action Buttons**:
 - 'Update Now' button (primary, full-width) - downloads and applies update
@@ -270,15 +271,15 @@ A professional AI-powered mobile application for agricultural price intelligence
 \n**Preferences**:
 - Language selection (if multi-language support)
 - Theme toggle (Light / Dark mode)
-- Notification preferences (price alerts, insights updates, **dataset update notifications**)
+- Notification preferences (price alerts, insights updates, dataset update notifications)
 - Default dataset selection
-- **Auto-update preferences (link to Dataset Sync screen)**
+- Auto-update preferences (link to Dataset Sync screen)
 
 **Data Management**:
 - 'Clear Cache' button\n- 'Delete All Predictions' button
 - 'Manage Uploaded Datasets' link
-- **'Force Sync Datasets' button**
-- **'Reset to Default Dataset' button**
+- 'Force Sync Datasets' button
+- 'Reset to Default Dataset' button
 
 **About Section**:
 - App version number
@@ -294,15 +295,15 @@ A professional AI-powered mobile application for agricultural price intelligence
 - Daily/weekly summary notifications (configurable)
 - Dataset upload completion notifications
 - Model training completion notifications
-- **Dataset update available notifications**
-- **Dataset sync completion notifications**
-- **Model retraining progress notifications**
+- Dataset update available notifications
+- Dataset sync completion notifications
+- Model retraining progress notifications
 
 **In-App Notifications**:
 - Toast messages for quick feedback (e.g., 'Prediction saved successfully')
 - Alert dialogs for critical actions (e.g., 'Delete dataset?')
-- **Banner notifications for dataset updates (dismissible, with'Update Now' action)**
-- **Bottom sheet prompts for major dataset changes requiring user attention**
+- Banner notifications for dataset updates (dismissible, with'Update Now' action)
+- Bottom sheet prompts for major dataset changes requiring user attention
 
 ## 4. Mobile Design System
 
@@ -313,7 +314,8 @@ A professional AI-powered mobile application for agricultural price intelligence
   - Purple (#a855f7) for secondary elements
   - Green (#10b981) for positive indicators (price up, success, up-to-date status)
   - Red (#ef4444) for negative indicators (price down, errors, sync failed)
-  - Orange (#f59e0b) for warnings (update available)\n- **Text**: White (#ffffff) primary, gray (#9ca3af) secondary\n- **Card Background**: Semi-transparent dark (#1f2937 with 80% opacity)
+  - Orange (#f59e0b) for warnings (update available)\n- **Text**: White (#ffffff) primary, gray (#9ca3af) secondary
+- **Card Background**: Semi-transparent dark (#1f2937 with 80% opacity)
 \n### 4.2 Visual Style
 - **Card Design**: Rounded corners (12px border-radius), subtle shadows, glassmorphism effect
 - **Buttons**: Full-width primary buttons (48px height), rounded (8px), gradient backgrounds
@@ -344,250 +346,96 @@ A professional AI-powered mobile application for agricultural price intelligence
 - **Color Contrast**: WCAG AA compliant contrast ratios
 - **Screen Reader Support**: Proper labels for all interactive elements
 - **Voice Control**: Compatible with iOS VoiceOver and Android TalkBack
-\n## 5. Reference Materials
+\n## 5. Backend Requirements
 
-### 5.1 Current Interface Screenshots
-- WhatsApp Image 2025-12-05 at 20.18.49_18cee13a.jpg (existing web dashboard interface showing Karnataka Red Chilli Price Prediction Model - to be adapted for mobile)
-\n### 5.2 Example Training Dataset
-- image.png (standard dataset structure with 100,000+ records including columns: Date, Market, Variety, Modal Price, Arrivals, Rainfall, Temperature Max/Min, Humidity, Area, Production)\n
-These screenshots show the current web interface and the mandatory dataset structure. The mobile app must be trained on datasets following the exact format shown in image.png with a minimum of 100,000 samples to ensure robust model performance and accurate predictions.
+### 5.1 Dataset Management & Training Pipeline
 
-## 6. Mobile-Specific Features
+**Dataset Format Requirements**:
+- **File Format**: CSV or Excel (.xlsx, .xls)\n- **Minimum Sample Count**: 100,000+ records
+- **Required Columns** (based on image.png):
+  - Date (format: YYYY-MM-DD or similar)
+  - Year (integer)
+  - Month (integer: 1-12)
+  - Market/City (string)
+  - Variety (string)
+  - Arrivals (numeric)
+  - Temperature Max (numeric)
+  - Temperature Min (numeric)
+  - Humidity (numeric)
+  - Area (numeric)
+  - Modal Price (numeric, target variable)
+\n**Data Validation**:
+- Check for minimum100,000 samples
+- Validate all required columns present
+- Check data types for each column
+- Handle missing values (imputation or rejection)
+- Detect and remove duplicates
+- Validate date ranges and consistency
 
-### 6.1 Offline Mode
-- Cache recent predictions locally using AsyncStorage or SQLite
-- Allow viewing of cached data when offline
-- Queue prediction requests when offline, sync when connection restored
-- Display offline indicator in UI
-- **Cache last known dataset version for offline predictions**
-- **Queue dataset update downloads for when connection is restored**
+**Model Training Workflow**:
+\n1. **Data Preprocessing**:
+   - Load dataset from uploaded file or code-level dataset
+   - Clean data (handle missing values, outliers)
+   - Feature engineering:\n     - Extract time-based features (day of week, season, etc.)
+     - Create lag features (previous month prices)
+     - Calculate rolling averages
+   - Normalize/standardize numerical features
+   - Encode categorical variables (Market, Variety)
+   - Split data: 80% training, 10% validation, 10% test\n
+2. **Model Training** (parallel training of multiple models):
+   - **RandomForest Regressor**:\n     - Hyperparameters: n_estimators=200, max_depth=20, min_samples_split=5
+     - Train on full training set
+     - Evaluate on validation set
+   - **XGBoost Regressor**:
+     - Hyperparameters: n_estimators=300, learning_rate=0.05, max_depth=10
+     - Train with early stopping
+     - Evaluate on validation set
+   - **LSTM Neural Network**:
+     - Architecture: 2 LSTM layers (128, 64 units), Dense output layer
+     - Sequence length: 12 months
+     - Train for 50 epochs with early stopping
+     - Evaluate on validation set
 
-### 6.2 Location Services (Optional)
-- Auto-detect user location to suggest nearest markets
-- Location-based weather data integration
-- Requires location permission from user
-\n### 6.3 Camera Integration (Optional)
-- Scan QR codes for quick dataset imports
-- Capture photos of market conditions for context
-\n### 6.4 Biometric Authentication (Optional)
-- Face ID / Touch ID (iOS)\n- Fingerprint / Face Unlock (Android)
-- Secure access to sensitive data
+3. **Model Evaluation**:
+   - Calculate metrics on test set:\n     - MAE (Mean Absolute Error)
+     - RMSE (Root Mean Squared Error)
+     - R² Score
+     - MAPE (Mean Absolute Percentage Error)
+   - Compare model performance\n   - Select best performer based on R² Score
 
-### 6.5 Widget Support (Optional)
-- Home screen widget showing latest prediction
-- Quick access to AI assistant
-- Live price updates
-- **Dataset update status indicator**
+4. **Model Saving**:
+   - Save trained models to disk (pickle or joblib format)
+   - Store model metadata in database:\n     - Model type
+     - Training date
+     - Dataset version
+     - Performance metrics\n     - Hyperparameters
+- Mark best model as active
 
-### 6.6 Real-Time Dataset Synchronization
-- **WebSocket connection for instant update notifications**
-- **Background sync service running periodically**
-- **Smart sync logic: only download changed data (delta updates)**
-- **Conflict resolution for simultaneous updates**
-- **Rollback capability if update fails**
-- **Version control for datasets with changelog tracking**
+5. **Prediction Generation**:
+   - Load active model from disk
+   - Preprocess input features (year, month, market, variety, etc.)
+   - Generate prediction with confidence interval
+   - Return result with metadata
 
-## 7. Backend API Adaptations for Mobile
+**Automatic Retraining Trigger**:
+- When new dataset added to codebase:\n  1. Detect new dataset version on application startup
+  2. Queue background training job (Celery task)
+  3. Execute full training pipeline
+  4. Update model metadata in database
+  5. Send push notifications to users
+  6. Broadcast WebSocket event: 'retrain_completed'
 
-### 7.1 Mobile-Optimized Endpoints
+**Training Progress Tracking**:
+- Celery task updates progress state:\n  - Stage1: Data Loading (0-10%)
+  - Stage 2: Preprocessing (10-30%)
+  - Stage 3: Model Training (30-80%)
+  - Stage 4: Evaluation (80-95%)
+  - Stage 5: Saving (95-100%)
+- Mobile app polls `/retrain-status` endpoint for progress updates
+- Display progress bar in UI
+\n### 5.2 Code-Level Dataset Management
 
-#### **Endpoint1: `/predict` (POST)**
-- **Purpose**: Generate price predictions based on user inputs
-- **Input Parameters**:
-  - `year` (integer): Selected year for prediction
-  - `month` (integer): Selected month (1-12)
-  - `market` (string): Market/city name
-  - `variety` (string): Crop variety
-  - `model_type` (string): ML model to use
-  - `dataset_id` (optional): ID of uploaded custom dataset
-  - **`dataset_version` (optional): Specific dataset version to use**
-- **Output** (compressed JSON):
-  - `predicted_price` (float)\n  - `confidence_interval` (object)
-  - `trend` (string)
-  - `timestamp` (datetime)
-  - **`dataset_version_used` (string)**
-- **Mobile Optimization**: Gzip compression, reduced payload size
-
-#### **Endpoint 2: `/upload-dataset` (POST)**
-- **Purpose**: Handle custom dataset uploads from mobile devices
-- **Input**: Multipart form data with CSV/Excel file
-- **Processing Steps**:
-  1. Validate file format and size
-  2. Check row count (minimum 100,000 samples)
-  3. Validate required columns\n  4. Store dataset in cloud storage (S3/GCS)
-  5. **Assign version number and create changelog**
-  6. **Automatically trigger model training**
-  7. Return dataset metadata
-- **Output**:
-  - `dataset_id` (string)
-  - `sample_count` (integer)
-  - `status` (string)
-  - `message` (string)
-  - **`version` (string)**
-  - **`changelog` (string)**
-  - **`training_job_id` (string)**
-- **Mobile Optimization**: Chunked upload support for large files, progress tracking
-
-#### **Endpoint 3: `/ai-insights` (POST)**
-- **Purpose**: Generate natural language insights\n- **Input Parameters**: Year, month, market, variety, predicted_price, historical_data
-- **Output**:
-  - `insights` (array of strings)
-  - `risk_alerts` (array)\n  - `trend_summary` (string)
-- **Mobile Optimization**: Concise text responses, limited to 3-5 insights
-
-#### **Endpoint 4: `/chat` (POST)**
-- **Purpose**: Conversational AI assistant
-- **Input**: `message` (string), `context` (object)
-- **Output**: `response` (string), `charts` (optional array)
-- **Mobile Optimization**: Streaming responses for long answers, reduced chart data resolution
-
-#### **Endpoint 5: `/charts-data` (GET)**
-- **Purpose**: Retrieve visualization data for mobile charts
-- **Input Parameters**: Year, month, market, variety, chart_type
-- **Output**: JSON data formatted for mobile chart libraries
-- **Mobile Optimization**: Downsampled data points for performance (e.g., 100points instead of 1000)
-
-#### **Endpoint 6: `/sync-data` (GET)**
-- **Purpose**: Incremental data sync for offline mode
-- **Input**: `last_sync_timestamp` (datetime)
-- **Output**: Only new/updated records since last sync
-- **Mobile Optimization**: Minimal payload, delta updates only
-
-#### **Endpoint 7: `/register-device` (POST)**
-- **Purpose**: Register mobile device for push notifications
-- **Input**: `device_token` (FCM token), `platform` (iOS/Android)\n- **Output**: `status` (success/error)
-\n#### **Endpoint 8: `/send-notification` (POST)**
-- **Purpose**: Trigger push notifications (internal use)
-- **Input**: `user_id`, `notification_type`, `message`, `data`
-- **Output**: `status` (success/error)
-
-#### **Endpoint 9: `/check-dataset-updates` (GET)**
-- **Purpose**: Check if dataset updates are available
-- **Input Parameters**:
-  - `current_version` (string): User's current dataset version
-  - `dataset_id` (optional): Specific dataset to check
-- **Output**:
-  - `update_available` (boolean)
-  - `latest_version` (string)
-  - `changelog` (string)
-- `sample_count_change` (integer)
-  - `release_date` (datetime)
-  - `download_url` (string)
-  - `file_size` (integer in bytes)
-- **Mobile Optimization**: Lightweight response, cached on CDN
-
-#### **Endpoint 10: `/download-dataset-update` (GET)**
-- **Purpose**: Download updated dataset (delta or full)
-- **Input Parameters**:
-  - `dataset_id` (string)\n  - `from_version` (string): Current version\n  - `to_version` (string): Target version
-  - `delta_only` (boolean): If true, return only changes
-- **Output**: Compressed dataset file (CSV/Excel) or delta patch
-- **Mobile Optimization**: Resumable downloads, chunked transfer, gzip compression
-
-#### **Endpoint 11: `/dataset-changelog` (GET)**
-- **Purpose**: Retrieve detailed changelog for dataset versions
-- **Input Parameters**:\n  - `dataset_id` (string)
-  - `from_version` (optional): Start version
-  - `to_version` (optional): End version\n- **Output**:
-  - `changelog_entries` (array of objects):
-    - `version` (string)
-    - `release_date` (datetime)
-    - `changes` (array of strings)
-    - `sample_count` (integer)
-    - `breaking_changes` (boolean)
-\n#### **Endpoint 12: `/retrain-status` (GET)**
-- **Purpose**: Check status of model retraining job
-- **Input Parameters**: `job_id` (string)\n- **Output**:
-  - `status` (string):'queued', 'running', 'completed', 'failed'
-  - `progress` (integer): Percentage (0-100)
-  - `current_stage` (string): e.g., 'preprocessing', 'training', 'evaluation'
-  - `estimated_time_remaining` (integer in seconds)
-  - `error_message` (string, if failed)
-
-#### **Endpoint 13: `/websocket/dataset-updates` (WebSocket)**
-- **Purpose**: Real-time dataset update notifications
-- **Connection**: Persistent WebSocket connection
-- **Events Sent to Client**:
-  - `update_available`: New dataset version released
-  - `update_downloaded`: Dataset download completed
-  - `retrain_started`: Model retraining initiated
-  - `retrain_progress`: Retraining progress update
-  - `retrain_completed`: Model retraining finished
-  - `sync_failed`: Error during sync process
-- **Event Payload**: JSON object with relevant details
-
-### 7.2 Authentication & Security
-- **Token-Based Auth**: JWT tokens for secure API access
-- **Refresh Tokens**: Long-lived refresh tokens for seamless re-authentication
-- **SSL Pinning**: Prevent man-in-the-middle attacks
-\n### 7.3 Push Notification Backend
-- **FCM Integration**: Firebase Cloud Messaging for cross-platform notifications
-- **Notification Triggers**: Price alerts, dataset upload completion, model training updates, **dataset update notifications**
-- **User Preferences**: API endpoints for managing notification settings
-
-## 8. Project Deliverables
-
-- Fully functional React Native mobile app (iOS and Android)
-- Complete backend API with mobile-optimized endpoints
-- Integrated ML models with prediction pipeline trained on 100,000+ sample datasets
-- AI chat assistant functionality\n- Dataset upload and processing system for mobile\n- **Real-time dataset synchronization system with version control**
-- **Automatic model retraining pipeline triggered by code-level dataset additions**
-- **WebSocket-based real-time update notification system**
-- Year/month-based prediction filtering
-- Offline mode with local data caching
-- Push notification system\n- Clean, modular, production-ready code
-- Responsive design for all mobile screen sizes (phones and tablets)
-- App Store and Google Play Store submission-ready builds
-- Documentation for deployment and maintenance
-- Model training pipeline optimized for large datasets (100,000+ samples)
-- Data validation system ensuring compliance with required format and sample size
-- **Dataset versioning and changelog management system**
-- **Background sync service with conflict resolution**
-\n## 9. Use Cases
-
-- Professional portfolio/resume project
-- Hackathon submission
-- Final year academic project
-- Startup MVP foundation
-- Enterprise agricultural intelligence mobile solution
-- Field use by farmers, traders, and agricultural consultants
-- Custom market analysis with user-provided datasets (100,000+ samples)
-- Historical trend analysis by specific time periods
-- On-the-go price predictions and insights
-- Large-scale agricultural market forecasting using comprehensive historical data
-- Research and academic applications requiring high-accuracy predictions based on extensive training data (100,000+ samples)
-- Real-world deployment for agricultural market intelligence with production-grade accuracy
-- **Continuous model improvement through automatic dataset updates and retraining**
-- **Multi-user environments with centralized dataset management and automatic distribution**
-\n---
-
-# Backend Requirements Document for Mobile Application
-
-## 1. Backend Overview
-
-The backend system powers the AI-driven agricultural price prediction mobile application. It handles data processing, machine learning model training and inference, mobile-optimized API endpoints, push notifications, AI assistant functionality, and **real-time dataset synchronization with automatic model retraining triggered by code-level dataset additions**.\n
-**Technology Stack**:
-- **Framework**: Python FastAPI (fast, modern, mobile-friendly)
-- **Machine Learning**: Scikit-learn, XGBoost, RandomForest, LSTM\n- **Data Processing**: Pandas, NumPy\n- **Database**: PostgreSQL or MongoDB
-- **AI Assistant**: LLM-based conversational AI (API integration)
-- **Push Notifications**: Firebase Cloud Messaging (FCM)
-- **Authentication**: JWT tokens\n- **File Storage**: AWS S3 or Google Cloud Storage for uploaded datasets
-- **Background Jobs**: Celery with Redis/RabbitMQ for asynchronous tasks
-- **Real-time Communication**: WebSocket (using FastAPI WebSocket support) or Server-Sent Events
-- **Version Control**: Git-based dataset versioning or custom versioning system
-- **Caching**: Redis for API response caching and session management
-- **Code-Level Dataset Management**: Datasets added directly in codebase, automatically triggering training pipeline
-
----
-
-## 2. Core Backend Components
-
-### 2.1 Code-Level Dataset Management System
-
-**Purpose**: Manage datasets directly in the codebase and automatically trigger model training when new datasets are added.
-
-**Implementation Approach**:
-\n#### **Dataset Storage Structure**
+**Dataset Storage Structure**:
 ```
 backend/
 ├── datasets/
@@ -604,7 +452,7 @@ backend/
 └── api/
 ```
 
-#### **Dataset Configuration File (dataset_config.py)**
+**Dataset Configuration (dataset_config.py)**:
 ```python
 DATASETS = {
     'default': {
@@ -616,68 +464,95 @@ DATASETS = {
         'auto_train': True\n    }
 }
 ```
-\n#### **Automatic Training Trigger**
-- When developer adds new dataset file to `datasets/` folder
-- Updates `dataset_config.py` with new version
-- On application startup, system checks for new dataset versions
-- If `auto_train: True`, automatically triggers training pipeline
-- Training runs as background Celery task
+\n**Automatic Training on Startup**:
+- Application startup script checks `dataset_config.py`
+- Compares dataset version with last trained version in database
+- If new version detected and `auto_train: True`, queue training job
+- Celery worker executes training pipeline
+- Update database with new model version
+\n### 5.3 Mobile-Optimized API Endpoints
 
-#### **Training Pipeline Workflow**
-1. **Startup Check**: On backend startup, compare current dataset version with last trained version
-2. **Auto-Trigger**: If new version detected, queue training job
-3. **Training Execution**: Celery worker picks up job and trains all models
-4. **Notification**: Send push notifications to mobile users about new model availability
-5. **Version Update**: Update database with new model version and metrics
+#### **Endpoint1: `/predict` (POST)**
+- **Purpose**: Generate price predictions\n- **Input**: year, month, market, variety, model_type, dataset_id, dataset_version
+- **Output**: predicted_price, confidence_interval, trend, timestamp, dataset_version_used
+- **Optimization**: Gzip compression, reduced payload\n\n#### **Endpoint 2: `/upload-dataset` (POST)**
+- **Purpose**: Handle custom dataset uploads
+- **Input**: Multipart form data (CSV/Excel file)
+- **Processing**: Validate format, check sample count (≥100,000), validate columns, store in cloud, assign version, trigger training
+- **Output**: dataset_id, sample_count, status, message, version, changelog, training_job_id
+- **Optimization**: Chunked upload, progress tracking
 
-### 2.2 Automatic Model Retraining Pipeline
+#### **Endpoint 3: `/ai-insights` (POST)**
+- **Purpose**: Generate natural language insights
+- **Input**: year, month, market, variety, predicted_price, historical_data\n- **Output**: insights (array), risk_alerts (array), trend_summary\n- **Optimization**: Concise text (3-5 insights)\n
+#### **Endpoint 4: `/chat` (POST)**
+- **Purpose**: Conversational AI assistant
+- **Input**: message, context\n- **Output**: response, charts (optional)
+- **Optimization**: Streaming responses, reduced chart resolution
 
-**Purpose**: Automatically retrain ML models when new dataset is added to codebase.
+#### **Endpoint 5: `/charts-data` (GET)**
+- **Purpose**: Retrieve visualization data
+- **Input**: year, month, market, variety, chart_type
+- **Output**: JSON data for mobile charts
+- **Optimization**: Downsampled data points (100instead of 1000)
 
-**Workflow**:
+#### **Endpoint 6: `/sync-data` (GET)**
+- **Purpose**: Incremental data sync for offline mode
+- **Input**: last_sync_timestamp
+- **Output**: Only new/updated records
+- **Optimization**: Delta updates only
 
-1. **Dataset Detection**\n   - Application startup script checks `dataset_config.py`
-   - Compares dataset version with last trained version in database
-   - If new version found, trigger training\n
-2. **Training Initiation**
-   - Create Celery background job
-   - Job parameters: dataset_path, version, model_types\n   - Queue job with high priority
+#### **Endpoint 7: `/register-device` (POST)**
+- **Purpose**: Register device for push notifications
+- **Input**: device_token (FCM), platform (iOS/Android)
+- **Output**: status\n\n#### **Endpoint 8: `/send-notification` (POST)**
+- **Purpose**: Trigger push notifications (internal)\n- **Input**: user_id, notification_type, message, data
+- **Output**: status\n
+#### **Endpoint 9: `/check-dataset-updates` (GET)**
+- **Purpose**: Check for dataset updates
+- **Input**: current_version, dataset_id
+- **Output**: update_available, latest_version, changelog, sample_count_change, release_date, download_url, file_size
+- **Optimization**: Lightweight, cached on CDN
 
-3. **Training Process** (Celery Task)
-   - **Stage 1: Data Loading** (0-10%)
-     - Load dataset from file path
-     - Validate data format and sample count
-   - **Stage 2: Preprocessing** (10-30%)\n     - Handle missing values\n     - Normalize features
-     - Encode categorical variables
-- Create time-based features
-     - Split data (80/10/10)\n   - **Stage 3: Model Training** (30-80%)
-     - Train RandomForest model
-     - Train XGBoost model
-     - Train LSTM model
-     - Update progress after each model
-   - **Stage 4: Evaluation** (80-95%)
-     - Calculate metrics (MAE, RMSE, R², MAPE)
-     - Compare with previous model performance
-     - Select best performer
-   - **Stage 5: Model Saving** (95-100%)
-     - Save trained models to disk
-     - Update model metadata in database
-     - Generate performance report
+#### **Endpoint 10: `/download-dataset-update` (GET)**
+- **Purpose**: Download updated dataset
+- **Input**: dataset_id, from_version, to_version, delta_only
+- **Output**: Compressed dataset file or delta patch
+- **Optimization**: Resumable downloads, chunked transfer, gzip\n
+#### **Endpoint 11: `/dataset-changelog` (GET)**
+- **Purpose**: Retrieve detailed changelog
+- **Input**: dataset_id, from_version, to_version
+- **Output**: changelog_entries (array)
+\n#### **Endpoint 12: `/retrain-status` (GET)**
+- **Purpose**: Check model retraining job status
+- **Input**: job_id
+- **Output**: status, progress, current_stage, estimated_time_remaining, error_message
 
-4. **Notification**
-   - Send push notification to all users:'Models updated with new data!'
-   - Send WebSocket event: `retrain_completed`
-   - Update app dashboard with new model metrics
+#### **Endpoint 13: `/websocket/dataset-updates` (WebSocket)**
+- **Purpose**: Real-time dataset update notifications
+- **Events**: update_available, update_downloaded, retrain_started, retrain_progress, retrain_completed, sync_failed\n\n### 5.4 Database Schema
 
-5. **Rollback Mechanism**
-   - If training fails or performance degrades:\n     - Keep previous model version active
-     - Log error details
-     - Send alert notification
-\n**Celery Task Implementation**:
+**Datasets Table**:
+- id, filename, upload_date, sample_count, date_range_start, date_range_end, markets, varieties, status, cloud_storage_url, version, previous_version_id, changelog, is_active, file_path
+
+**Model Training Jobs Table**:
+- id, job_id, dataset_version, model_types, status, progress, current_stage, started_at, completed_at, error_message, metrics\n
+**Trained Models Table**:
+- id, model_type, dataset_version, file_path, metrics, trained_at, is_active\n
+**Sync Events Table**:
+- id, user_id, event_type, dataset_version, timestamp, payload, delivered\n
+### 5.5 Background Job Processing
+
+**Celery Configuration**:
+- **Broker**: Redis or RabbitMQ
+- **Workers**: Minimum 2workers for redundancy
+- **Task Priorities**: High for auto-training, normal for user uploads
+- **Task Routing**: Separate queues for training vs prediction tasks
+\n**Training Task Implementation**:
 ```python
 @celery.task(bind=True)\ndef auto_train_models(self, dataset_path, version):
     try:
-        # Stage 1: Data Loading
+        # Stage 1: Data Loading (0-10%)
         self.update_state(state='PROGRESS', meta={'progress': 5, 'stage': 'loading'})
         dataset = pd.read_csv(dataset_path)
         
@@ -685,21 +560,20 @@ DATASETS = {
         if len(dataset) < 100000:
             raise ValueError(f'Dataset must have at least 100,000 samples. Found: {len(dataset)}')
         
-        # Stage 2: Preprocessing
+        # Stage 2: Preprocessing (10-30%)
         self.update_state(state='PROGRESS', meta={'progress': 20, 'stage': 'preprocessing'})
         X_train, X_val, X_test, y_train, y_val, y_test = preprocess_data(dataset)
         
-        # Stage 3: Training
+        # Stage 3: Training (30-80%)
         models = {}
         model_types = ['RandomForest', 'XGBoost', 'LSTM']
         for i, model_type in enumerate(model_types):
             progress = 30 + (i / len(model_types)) * 50
             self.update_state(state='PROGRESS', meta={'progress': progress, 'stage': f'training_{model_type}'})
             models[model_type] = train_model(model_type, X_train, y_train)\n        
-        # Stage 4: Evaluation
-        self.update_state(state='PROGRESS', meta={'progress': 85, 'stage': 'evaluation'})
+        # Stage 4: Evaluation (80-95%)\n        self.update_state(state='PROGRESS', meta={'progress': 85, 'stage': 'evaluation'})
         metrics = evaluate_models(models, X_test, y_test)
-        \n        # Stage 5: Saving
+        \n        # Stage 5: Saving (95-100%)
         self.update_state(state='PROGRESS', meta={'progress': 95, 'stage': 'saving'})
         save_models(models, version)
         update_model_metadata(version, metrics)
@@ -714,234 +588,132 @@ DATASETS = {
         raise
 ```
 
-### 2.3 Dataset Versioning System
+### 5.6 Real-Time Sync Service
 
-**Purpose**: Track dataset versions and maintain changelog history.
-
-**Components**:
-
-#### **Version Numbering Scheme**
-- Semantic versioning: `MAJOR.MINOR.PATCH`
-  - MAJOR: Breaking changes (column schema changes)
-  - MINOR: New data added (more samples, new markets/varieties)
-  - PATCH: Bug fixes (data corrections, duplicate removal)
-- Example: `2.3.1`
-
-#### **Changelog Management**
-- Developer manually updates changelog in `dataset_config.py`
-- Changelog includes:
-  - Sample count difference
-  - Date range extension
-  - New markets or varieties
-  - Data quality improvements
-\n#### **Version Storage**
-- Store each dataset version in `datasets/` folder
-- Naming convention: `v{version}.csv`
-- Metadata stored in `dataset_config.py` and database
-
-### 2.4 Real-Time Sync Service
-
-**Purpose**: Enable mobile apps to receive instant notifications when models are retrained.
-
-**Architecture**:
-
-#### **WebSocket Server**
+**WebSocket Server**:
 - Implemented using FastAPI WebSocket support
 - Maintains persistent connections with mobile clients
 - Handles authentication via JWT tokens
 - Broadcasts events to connected clients
-
-#### **Event Broadcasting**
+\n**Event Broadcasting**:
 - When model training completes:\n  1. Training pipeline finishes
   2. Backend broadcasts `retrain_completed` event to all connected clients
   3. Clients receive notification and update UI
-
-#### **Connection Management**
+\n**Connection Management**:
 - Track active connections in Redis (user_id -> connection_id mapping)
 - Handle disconnections gracefully
 - Implement reconnection logic with exponential backoff
 - Send heartbeat pings every 30 seconds
 
-#### **Fallback Mechanism**
+**Fallback Mechanism**:
 - If WebSocket connection fails, fall back to push notifications (FCM)
 - Periodic polling as last resort (every 6 hours)
+\n### 5.7 Security & Performance
 
-### 2.5 Background Sync Service
-
-**Purpose**: Periodically check for new model versions and notify users.
-
-**Implementation**:
-
-#### **Celery Periodic Task**
-- Scheduled task runs every 1 hour (configurable)
-- Checks if new model version is available
-- If update found:\n  - Send push notification to users
-  - Broadcast WebSocket event
-  - Log update event\n\n#### **Smart Sync Logic**
-- Compare current model version with user's cached version
-- Only notify if significant update (version change)\n- Batch notifications to avoid spam
-\n---
-
-## 3. Database Schema
-
-### 3.1 Datasets Table
-- `id` (primary key)
-- `filename` (string)
-- `upload_date` (datetime)
-- `sample_count` (integer)
-- `date_range_start` (date)
-- `date_range_end` (date)
-- `markets` (array)\n- `varieties` (array)\n- `status` (string)
-- `cloud_storage_url` (string): S3/GCS URL\n- **`version` (string): Semantic version number**
-- **`previous_version_id` (foreign key): Link to previous version**
-- **`changelog` (text): Human-readable changelog**
-- **`is_active` (boolean): Whether this version is currently active**
-- **`file_path` (string): Local file path in codebase**
-\n### 3.2 Model Training Jobs Table
-- `id` (primary key)
-- `job_id` (string): Celery task ID
-- `dataset_version` (string)\n- `model_types` (array)
-- `status` (string): 'queued', 'running', 'completed', 'failed'
-- `progress` (integer): 0-100
-- `current_stage` (string)\n- `started_at` (datetime)
-- `completed_at` (datetime, nullable)
-- `error_message` (text, nullable)
-- `metrics` (JSON): Final model performance metrics
-\n### 3.3 Trained Models Table
-- `id` (primary key)
-- `model_type` (string): 'RandomForest', 'XGBoost', 'LSTM'
-- `dataset_version` (string)
-- `file_path` (string): Path to saved model file
-- `metrics` (JSON): Performance metrics\n- `trained_at` (datetime)
-- `is_active` (boolean)
-\n### 3.4 Sync Events Table
-- `id` (primary key)
-- `user_id` (foreign key)\n- `event_type` (string): 'update_available', 'retrain_completed', etc.
-- `dataset_version` (string)
-- `timestamp` (datetime)
-- `payload` (JSON): Event-specific data
-- `delivered` (boolean): Whether notification was successfully delivered
-
----
-
-## 4. Security Considerations
-
-### 4.1 Dataset Security
-- Store datasets in secure directory with restricted access
-- Validate dataset integrity on load
-- Scan uploaded files for malware (user uploads)
-- Rate limit update checks to prevent abuse
-
-### 4.2 WebSocket Security
-- Require JWT authentication for WebSocket connections
-- Validate tokens on each message
-- Implement rate limiting for WebSocket messages
-- Encrypt WebSocket traffic (WSS)\n
-### 4.3 Model Security
-- Store trained models securely (encrypted at rest)
-- Prevent unauthorized access to model files
-- Log all model training and deployment events
-- Implement model versioning and rollback\n
----
-
-## 5. Performance Optimization
-
-### 5.1 Caching Strategy
+**Security**:
+- JWT token-based authentication
+- SSL/TLS encryption for all API calls
+- Validate dataset integrity on upload
+- Rate limiting for API endpoints
+- Secure WebSocket connections (WSS)\n
+**Performance Optimization**:
 - Cache dataset metadata in Redis (1-hour TTL)
 - Cache model predictions for common queries (24-hour TTL)
-- Cache changelog responses (5-minute TTL)
-- Use CDN for dataset downloads (user uploads)
-
-### 5.2 Database Optimization
-- Index frequently queried columns (dataset_version, user_id)
-- Partition large tables by date\n- Use read replicas for heavy read operations
-- Implement connection pooling
-
-### 5.3 Background Job Optimization
-- Use Celery task priorities (high for auto-training)\n- Implement task result expiration (7 days)
-- Use task routing for different job types
-- Monitor queue length and scale workers dynamically
-
----
-
-## 6. Monitoring & Logging
-
-### 6.1 Key Metrics to Track
-- Model training duration and success rate
-- WebSocket connection count and stability
-- API response times for sync endpoints
-- Push notification delivery rate
-- User sync status distribution (up-to-date vs outdated)
-\n### 6.2 Logging\n- Log all dataset additions with version and changelog
+- Use CDN for dataset downloads
+- Database indexing on frequently queried columns
+- Connection pooling for database\n
+**Monitoring & Logging**:
+- Log all dataset additions with version and changelog
 - Log model training events with metrics
 - Log sync events (updates, downloads, failures)
-- Log WebSocket connection events
-- Use structured logging (JSON format)
+- Track key metrics: training duration, API response times, WebSocket connection count
 - Integrate with monitoring tools (Sentry, CloudWatch, Datadog)
 
-### 6.3 Alerts
-- Alert on model training failures
-- Alert on high sync failure rate
-- Alert on WebSocket connection drops
-- Alert on low disk space or high CPU usage
-\n---
+## 6. Reference Materials
 
-## 7. Deployment Considerations
+### 6.1 Current Interface Screenshots
+- WhatsApp Image 2025-12-05 at 20.18.49_18cee13a.jpg (existing web dashboard interface showing Karnataka Red Chilli Price Prediction Model - to be adapted for mobile)
+\n### 6.2 Example Training Dataset
+- image.png (standard dataset structure with 100,000+ records including columns: Date, Year, Month, Market, Variety, Modal Price, Arrivals, Rainfall, Temperature Max/Min, Humidity, Area, Production)\n
+These screenshots show the current web interface and the mandatory dataset structure. The mobile app must be trained on datasets following the exact format shown in image.png with a minimum of 100,000 samples to ensure robust model performance and accurate predictions.
 
-### 7.1 Infrastructure Requirements
-- **Web Server**: Uvicorn/Gunicorn for FastAPI\n- **Background Workers**: Celery workers (minimum 2for redundancy)
-- **Message Broker**: Redis or RabbitMQ for Celery
-- **Database**: PostgreSQL with replication
-- **Cloud Storage**: AWS S3 or Google Cloud Storage (for user uploads)
-- **WebSocket Server**: Integrated with FastAPI
-- **Load Balancer**: Nginx or AWS ALB for distributing traffic
+## 7. Mobile-Specific Features
 
-### 7.2 Scaling Strategy
-- Horizontal scaling for API servers (add more instances)
-- Vertical scaling for database (increase resources)
-- Auto-scaling for Celery workers based on queue length
-- Use managed services (AWS RDS, ElastiCache) for easier scaling
+### 7.1 Offline Mode
+- Cache recent predictions locally using AsyncStorage or SQLite
+- Allow viewing of cached data when offline
+- Queue prediction requests when offline, sync when connection restored
+- Display offline indicator in UI
+- Cache last known dataset version for offline predictions
+- Queue dataset update downloads for when connection is restored
 
-### 7.3 Backup & Recovery
-- Daily automated backups of database\n- Versioned backups of datasets in codebase (Git)
-- Backup trained models regularly
-- Test recovery procedures quarterly
-- Implement disaster recovery plan
+### 7.2 Location Services (Optional)
+- Auto-detect user location to suggest nearest markets
+- Location-based weather data integration
+- Requires location permission from user
+\n### 7.3 Camera Integration (Optional)
+- Scan QR codes for quick dataset imports
+- Capture photos of market conditions for context
+\n### 7.4 Biometric Authentication (Optional)
+- Face ID / Touch ID (iOS)\n- Fingerprint / Face Unlock (Android)
+- Secure access to sensitive data
+
+### 7.5 Widget Support (Optional)
+- Home screen widget showing latest prediction
+- Quick access to AI assistant
+- Live price updates
+- Dataset update status indicator
+
+### 7.6 Real-Time Dataset Synchronization
+- WebSocket connection for instant update notifications
+- Background sync service running periodically
+- Smart sync logic: only download changed data (delta updates)
+- Conflict resolution for simultaneous updates
+- Rollback capability if update fails
+- Version control for datasets with changelog tracking
+
+## 8. Project Deliverables
+
+- Fully functional React Native mobile app (iOS and Android)
+- Complete backend API with mobile-optimized endpoints
+- Integrated ML models with prediction pipeline trained on 100,000+ sample datasets
+- AI chat assistant functionality\n- Dataset upload and processing system for mobile
+- Real-time dataset synchronization system with version control
+- Automatic model retraining pipeline triggered by code-level dataset additions
+- WebSocket-based real-time update notification system
+- Year/month-based prediction filtering
+- Offline mode with local data caching
+- Push notification system\n- Clean, modular, production-ready code
+- Responsive design for all mobile screen sizes (phones and tablets)
+- App Store and Google Play Store submission-ready builds
+- Documentation for deployment and maintenance
+- Model training pipeline optimized for large datasets (100,000+ samples)
+- Data validation system ensuring compliance with required format and sample size
+- Dataset versioning and changelog management system
+- Background sync service with conflict resolution
+\n## 9. Use Cases
+
+- Professional portfolio/resume project
+- Hackathon submission
+- Final year academic project
+- Startup MVP foundation
+- Enterprise agricultural intelligence mobile solution
+- Field use by farmers, traders, and agricultural consultants
+- Custom market analysis with user-provided datasets (100,000+ samples)
+- Historical trend analysis by specific time periods
+- On-the-go price predictions and insights
+- Large-scale agricultural market forecasting using comprehensive historical data
+- Research and academic applications requiring high-accuracy predictions based on extensive training data (100,000+ samples)
+- Real-world deployment for agricultural market intelligence with production-grade accuracy
+- Continuous model improvement through automatic dataset updates and retraining
+- Multi-user environments with centralized dataset management and automatic distribution
 
 ---
 
-## 8. Testing Strategy
-
-### 8.1 Unit Tests
-- Test dataset validation logic
-- Test version comparison and changelog generation
-- Test model training pipeline stages
-- Test WebSocket event broadcasting
-\n### 8.2 Integration Tests
-- Test end-to-end dataset addition and training flow
-- Test model training triggered by new dataset
-- Test WebSocket connection and event delivery
-- Test push notification delivery
-
-### 8.3 Load Tests
-- Simulate 1000+ concurrent WebSocket connections
-- Test API performance under high load (1000 req/sec)
-- Test background job queue with100+ simultaneous tasks
-\n### 8.4 User Acceptance Testing
-- Test mobile app sync flow with real users
-- Verify notification delivery on iOS and Android
-- Test offline mode and sync after reconnection
-- Verify UI updates after model retraining
-
----\n
-## 9. Documentation Deliverables
-
-- API documentation (auto-generated by FastAPI)
-- Dataset addition guide for developers
-- Model training pipeline documentation
-- WebSocket event reference\n- Deployment and configuration guide
-- Troubleshooting guide for common issues
-- Performance tuning recommendations
-\n---
-
-This updated requirements document removes all admin panel functionality and implements a code-level dataset management system where datasets are added directly to the codebase, automatically triggering model training on application startup or when new versions are detected.
+## 10. Design Style\n
+- **Color Scheme**: Dark gradient background (charcoal to navy) with vibrant cyan and purple accents, creating a modern AI platform aesthetic suitable for professional agricultural intelligence applications
+- **Visual Elements**: Glassmorphism cards with subtle shadows and 12px rounded corners, providing depth and visual hierarchy while maintaining a clean, futuristic look
+- **Typography**: Bold headings (20-24px) paired with regular body text (14-16px) for clear information hierarchy, optimized for mobile readability in field conditions
+- **Interactive Feedback**: Smooth spring animations (200-300ms) for modals and transitions, haptic feedback on iOS, ripple effects on Android, creating a responsive and tactile user experience
+- **Data Visualization**: Touch-optimized charts with pinch-to-zoom and pan gestures, color-coded trend indicators (green for positive, red for negative), and AI-annotated graphs for contextual insights
+- **Update Indicators**: Animated pulse effects for'Update Available' badges, rotating refresh icons during sync, and checkmark animations on completion, providing clear visual feedback for background processes
