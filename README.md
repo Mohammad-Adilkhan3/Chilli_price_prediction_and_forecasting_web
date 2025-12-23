@@ -1,33 +1,51 @@
 # AgriAI - AI-Driven Agricultural Intelligence Platform
 
-## 🚀 Quick Start
+## ⚠️ IMPORTANT: Start Backend First!
 
-### Frontend (Web App)
+**Before using the Admin Dashboard or uploading files, you MUST start the backend server:**
+
 ```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Access at: http://localhost:5173
+cd backend
+./start.sh  # Linux/Mac
+# OR
+start.bat   # Windows
 ```
 
-### Backend (API Server)
+Wait for: `INFO: Uvicorn running on http://0.0.0.0:8000`
+
+**If you see "Cannot connect to backend server" error** → The backend is not running. Start it with the command above!
+
+See [START_BACKEND_GUIDE.md](./START_BACKEND_GUIDE.md) for detailed instructions.
+
+---
+
+## 🚀 Quick Start
+
+### Step 1: Start Backend (Required!)
+
+**Automatic (Recommended):**
+```bash
+cd backend
+./start.sh  # Linux/Mac
+# OR
+start.bat   # Windows
+```
+
+**Manual:**
 ```bash
 cd backend
 
-# Create virtual environment
+# Create virtual environment (first time only)
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Install dependencies
+# Install dependencies (first time only)
 pip install -r requirements.txt
 
-# Generate dataset (500,000 samples - takes 2-3 minutes)
+# Generate dataset (first time only - takes 2-3 minutes)
 python scripts/generate_dataset.py
 
-# Train models (takes 10-15 minutes)
+# Train models (first time only - takes 10-15 minutes)
 python scripts/train_models.py
 
 # Start API server
@@ -35,6 +53,19 @@ python -m app.main
 
 # Access at: http://localhost:8000
 # API Docs: http://localhost:8000/docs
+```
+
+### Step 2: Start Frontend
+
+**In a NEW terminal:**
+```bash
+# Install dependencies (first time only)
+npm install
+
+# Start development server
+npm run dev
+
+# Access at: http://localhost:5173
 ```
 
 ## 🎯 Features
