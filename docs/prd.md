@@ -6,9 +6,10 @@
 AI-Driven Agricultural Intelligence Mobile App – Chilli Price Forecasting
 
 ### 1.2 Project Description
-A professional AI-powered mobile application for agricultural price intelligence, specifically focused on chilli price forecasting. The app provides data-driven insights, predictive analytics, and AI-powered assistance for agricultural market decision-making on iOS and Android devices. Designed as an enterprise-ready mobile solution with modern AI platform aesthetics optimized for touch interfaces. The system is trained on 24million data points to achieve industry-leading prediction accuracy of 98.2%.
-\n### 1.3 Core Objectives
-- Deliver accurate AI-powered price predictions for agricultural commodities using large-scale training datasets (24M+ data points)
+A professional AI-powered mobile application for agricultural price intelligence, specifically focused on chilli price forecasting. The app provides data-driven insights, predictive analytics, and AI-powered assistance for agricultural market decision-making on iOS and Android devices. Designed as an enterprise-ready mobile solution with modern AI platform aesthetics optimized for touch interfaces. The system is trained on 100,000+ data points to achieve industry-leading prediction accuracy of 98.2%.
+
+### 1.3 Core Objectives
+- Deliver accurate AI-powered price predictions for agricultural commodities using large-scale training datasets (100,000+ data points)
 - Achieve 98.2% prediction accuracy using Random Forest as the best-performing model
 - Provide intelligent insights and risk alerts for market trends on mobile devices
 - Enable interactive data exploration through touch-optimized visualizations with frequency selection (Weekly, Monthly, Yearly)
@@ -32,7 +33,7 @@ A professional AI-powered mobile application for agricultural price intelligence
 ### 2.2 Backend Stack
 - **API Framework**: Python FastAPI
 - **ML Models**: Scikit-learn, XGBoost, RandomForest, LSTM, Linear Regression
-- **Training Data Requirements**: Minimum 24M+ data points for robust model training
+- **Training Data Requirements**: Minimum 100,000+ data points for robust model training
 - **Data Processing**: Pandas, NumPy for large-scale data handling
 - **AI Features**: LLM-based AI Assistant (API ready)
 - **Database**: PostgreSQL / MongoDB\n- **File Processing**: Pandas for CSV/Excel parsing and validation
@@ -83,8 +84,8 @@ A professional AI-powered mobile application for agricultural price intelligence
 - **R² Score Card**: 0.998 visualization
 - **Models Deployed Badge**: '4 Active ML Algorithms'
 - **Best Accuracy Badge**: '98.2% Random Forest ↑ +1.2%'
-- **Avg R² Score Card**: '0.983 Across All Models'
-- **Training Data Badge**: '24M Data Points'
+- **Avg R² Score Card**: '0.983Across All Models'
+- **Training Data Badge**: '100,000+ Data Points'
 - Last prediction timestamp
 - Dataset version indicator (e.g., 'Dataset v2.3- Updated 2 hours ago')
 - Update status badge ('Up to date' or 'Update available')
@@ -138,7 +139,7 @@ A professional AI-powered mobile application for agricultural price intelligence
 - 'Cancel Upload' option
 - Estimated time remaining
 \n**Validation Feedback**:
-- Success message with checkmark animation: 'Dataset uploaded successfully! 24M+ samples detected.'
+- Success message with checkmark animation: 'Dataset uploaded successfully! 100,000+ samples detected.'
 - Error messages with detailed explanations:\n  - 'Dataset must contain at least 100,000 samples. Current: 85,000'\n  - 'Missing required columns: [Rainfall, Humidity]'
   - 'Invalid data format in Modal Price column'
 \n**Dataset Management**:
@@ -153,8 +154,7 @@ A professional AI-powered mobile application for agricultural price intelligence
 
 **Auto-Generated Insights Section**:
 - Card-based layout with natural language explanations
-- Example: 'Price is expected to increase by 12% due to lower arrivals and reduced rainfall in the region'
-- Context-aware analysis based on current prediction, selected time period, and frequency
+- Example: 'Price is expected to increase by 12% due to lower arrivals and reduced rainfall in the region'\n- Context-aware analysis based on current prediction, selected time period, and frequency
 \n**Risk Alerts Section**:
 - Warning cards with alert icons\n- Examples:\n  - 'Supply volatility warning: Arrivals 15% below average'
   - 'Weather anomaly detected: Rainfall 30% lower than historical average'
@@ -228,7 +228,7 @@ A professional AI-powered mobile application for agricultural price intelligence
 **Horizontal Scrollable Model Cards**:
 - Each card displays:\n  - Model name with icon
   - Performance metrics (MAE, RMSE, R² Score)
-  - 'Best Performer' badge on Random Forest\n  - Training date and sample size (24M data points)
+  - 'Best Performer' badge on Random Forest\n  - Training date and sample size (100,000+ data points)
   - Dataset version used for training
 \n**Explainable AI (XAI) Section**:
 - Feature importance bar chart (horizontal bars)
@@ -237,7 +237,7 @@ A professional AI-powered mobile application for agricultural price intelligence
 
 **Model Training History**:
 - Timeline view showing training accuracy trends over time
-- Training dataset statistics (24M samples, feature distribution)
+- Training dataset statistics (100,000+ samples, feature distribution)
 - Retraining events triggered by dataset updates
 
 ### 3.9 Dataset Sync & Update Screen
@@ -251,7 +251,7 @@ A professional AI-powered mobile application for agricultural price intelligence
 - Dataset version comparison (Current vs Available)
 
 **Update Details Card**:
-- Shows changes in new dataset version:\n  - Sample count difference (e.g., '+5M new records')
+- Shows changes in new dataset version:\n  - Sample count difference (e.g., '+50,000 new records')
   - Date range extension\n  - New markets or varieties added
   - Data quality improvements
 - 'View Changelog' button for detailed update notes
@@ -364,7 +364,7 @@ A professional AI-powered mobile application for agricultural price intelligence
 ### 5.1 Dataset Management & Training Pipeline
 
 **Dataset Format Requirements**:
-- **File Format**: CSV or Excel (.xlsx, .xls)\n- **Minimum Sample Count**: 24M+ records for production-grade accuracy
+- **File Format**: CSV or Excel (.xlsx, .xls)\n- **Minimum Sample Count**: 100,000+ records for production-grade accuracy
 - **Required Columns** (based on image.png):
   - Date (format: YYYY-MM-DD or similar)
   - Year (integer)
@@ -378,7 +378,7 @@ A professional AI-powered mobile application for agricultural price intelligence
   - Area (numeric)
   - Modal Price (numeric, target variable)
 \n**Data Validation**:
-- Check for minimum24M samples
+- Check for minimum100,000 samples
 - Validate all required columns present
 - Check data types for each column
 - Handle missing values (imputation or rejection)
@@ -399,7 +399,7 @@ A professional AI-powered mobile application for agricultural price intelligence
 2. **Model Training** (parallel training of multiple models):
    - **Random Forest Regressor** (Best Performer):
      - Hyperparameters: n_estimators=200, max_depth=20, min_samples_split=5
-     - Train on full training set (24M samples)
+     - Train on full training set (100,000+ samples)
      - Target Accuracy: 98.2%
      - Target MAE: 1.02\n     - Target RMSE: 1.45
      - Target R² Score: 0.998
@@ -437,7 +437,7 @@ A professional AI-powered mobile application for agricultural price intelligence
      - Dataset version
      - Performance metrics (Accuracy, MAE, RMSE, R² Score)
      - Hyperparameters
-     - Training data size (24M samples)
+     - Training data size (100,000+ samples)
    - Mark Random Forest as active best performer
 
 5. **Prediction Generation**:
@@ -488,9 +488,9 @@ DATASETS = {
     'default': {
         'version': '2.0.0',
         'file_path': 'datasets/default/v2.0.0.csv',
-        'sample_count': 24000000,
+        'sample_count': 100000,
         'date_range': {'start': '2010-01-01', 'end': '2024-12-31'},
-        'changelog': 'Added 5M new records, extended date range, improved data quality',
+        'changelog': 'Added 50,000 new records, extended date range, improved data quality',
         'auto_train': True\n    }
 }
 ```
@@ -509,7 +509,7 @@ DATASETS = {
 #### **Endpoint 2: `/upload-dataset` (POST)**
 - **Purpose**: Handle custom dataset uploads
 - **Input**: Multipart form data (CSV/Excel file)
-- **Processing**: Validate format, check sample count (≥24M recommended), validate columns, store in cloud, assign version, trigger training
+- **Processing**: Validate format, check sample count (≥100,000 required), validate columns, store in cloud, assign version, trigger training
 - **Output**: dataset_id, sample_count, status, message, version, changelog, training_job_id
 - **Optimization**: Chunked upload, progress tracking
 
@@ -593,7 +593,8 @@ DATASETS = {
         dataset = pd.read_csv(dataset_path)
         
         # Validate minimum sample count
-        if len(dataset) < 24000000:\n            raise ValueError(f'Dataset must have at least 24M samples for production accuracy. Found: {len(dataset)}')
+        if len(dataset) < 100000:
+            raise ValueError(f'Dataset must have at least 100,000 samples for production accuracy. Found: {len(dataset)}')
         
         # Stage 2: Preprocessing (10-30%)
         self.update_state(state='PROGRESS', meta={'progress': 20, 'stage': 'preprocessing'})
@@ -672,8 +673,8 @@ DATASETS = {
 ### 6.1 Current Interface Screenshots
 - WhatsApp Image 2025-12-05 at 20.18.49_18cee13a.jpg (existing web dashboard interface showing Karnataka Red Chilli Price Prediction Model - to be adapted for mobile)
 \n### 6.2 Example Training Dataset
-- image.png (standard dataset structure with 24M+ records including columns: Date, Year, Month, Market, Variety, Modal Price, Arrivals, Rainfall, Temperature Max/Min, Humidity, Area, Production)\n
-These screenshots show the current web interface and the mandatory dataset structure. The mobile app must be trained on datasets following the exact format shown in image.png with a minimum of 24M samples to ensure robust model performance and achieve 98.2% prediction accuracy.
+- image.png (standard dataset structure with 100,000+ records including columns: Date, Year, Month, Market, Variety, Modal Price, Arrivals, Rainfall, Temperature Max/Min, Humidity, Area, Production)\n
+These screenshots show the current web interface and the mandatory dataset structure. The mobile app must be trained on datasets following the exact format shown in image.png with a minimum of 100,000 samples to ensure robust model performance and achieve 98.2% prediction accuracy.
 
 ## 7. Mobile-Specific Features
 
@@ -715,7 +716,7 @@ These screenshots show the current web interface and the mandatory dataset struc
 
 - Fully functional React Native mobile app (iOS and Android)
 - Complete backend API with mobile-optimized endpoints
-- Integrated ML models with prediction pipeline trained on 24M+ sample datasets
+- Integrated ML models with prediction pipeline trained on 100,000+ sample datasets
 - Four active ML models: Random Forest (98.2% accuracy), XGBoost (97.8%), LSTM (96.5%), Linear Regression (89.3%)\n- AI chat assistant functionality
 - Dataset upload and processing system for mobile
 - Real-time dataset synchronization system with version control
@@ -726,7 +727,7 @@ These screenshots show the current web interface and the mandatory dataset struc
 - Push notification system\n- Clean, modular, production-ready code\n- Responsive design for all mobile screen sizes (phones and tablets)
 - App Store and Google Play Store submission-ready builds
 - Documentation for deployment and maintenance
-- Model training pipeline optimized for large datasets (24M+ samples)
+- Model training pipeline optimized for large datasets (100,000+ samples)
 - Data validation system ensuring compliance with required format and sample size
 - Dataset versioning and changelog management system
 - Background sync service with conflict resolution
@@ -739,11 +740,11 @@ These screenshots show the current web interface and the mandatory dataset struc
 - Startup MVP foundation
 - Enterprise agricultural intelligence mobile solution
 - Field use by farmers, traders, and agricultural consultants
-- Custom market analysis with user-provided datasets (24M+ samples)
+- Custom market analysis with user-provided datasets (100,000+ samples)
 - Historical trend analysis by specific time periods and frequencies (weekly/monthly/yearly)
 - On-the-go price predictions and insights
 - Large-scale agricultural market forecasting using comprehensive historical data
-- Research and academic applications requiring high-accuracy predictions based on extensive training data (24M+ samples)
+- Research and academic applications requiring high-accuracy predictions based on extensive training data (100,000+ samples)
 - Real-world deployment for agricultural market intelligence with production-grade accuracy (98.2%)
 - Continuous model improvement through automatic dataset updates and retraining
 - Multi-user environments with centralized dataset management and automatic distribution
@@ -755,5 +756,9 @@ These screenshots show the current web interface and the mandatory dataset struc
 - **Typography**: Bold headings (20-24px) paired with regular body text (14-16px) for clear information hierarchy, optimized for mobile readability in field conditions
 - **Interactive Feedback**: Smooth spring animations (200-300ms) for modals and transitions, haptic feedback on iOS, ripple effects on Android, creating a responsive and tactile user experience
 - **Data Visualization**: Touch-optimized charts with pinch-to-zoom and pan gestures, color-coded trend indicators (green for positive, red for negative), and AI-annotated graphs for contextual insights, with frequency selector for weekly/monthly/yearly views
-- **Update Indicators**: Animated pulse effects for 'Update Available' badges, rotating refresh icons during sync, and checkmark animations on completion, providing clear visual feedback for background processes
+- **Update Indicators**: Animated pulse effects for'Update Available' badges, rotating refresh icons during sync, and checkmark animations on completion, providing clear visual feedback for background processes
 - **Performance Metrics Display**: Prominent display of model accuracy (98.2%), MAE (1.02), RMSE (1.45), and R² Score (0.998) with circular progress indicators and comparison tables for all four models
+
+## 11. Reference Files
+
+1. image.png\n2. image.png
