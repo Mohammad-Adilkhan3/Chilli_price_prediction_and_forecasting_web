@@ -76,34 +76,29 @@ class ModelManager:
       logger.warning("⚠ No models loaded! Using mock predictions.")
   
   def _create_default_encoders(self):
-    """Create default label encoders for markets and varieties"""
+    """Create default label encoders for cities and varieties"""
     self.encoders = {
-      "market": {
-        "Bangalore": 0,
-        "Delhi": 1,
-        "Mumbai": 2,
-        "Guntur": 3,
-        "Hyderabad": 4,
-        "Chennai": 5,
-        "Pune": 6,
-        "Kolkata": 7
+      "city": {
+        "Bangalore": 0, "Mumbai": 1, "Delhi": 2, "Chennai": 3,
+        "Kolkata": 4, "Hyderabad": 5, "Pune": 6, "Ahmedabad": 7,
+        "Jaipur": 8, "Lucknow": 9, "Kanpur": 10, "Nagpur": 11,
+        "Indore": 12, "Bhopal": 13, "Visakhapatnam": 14, "Patna": 15,
+        "Vadodara": 16, "Ludhiana": 17, "Agra": 18, "Nashik": 19,
+        "Faridabad": 20, "Meerut": 21, "Rajkot": 22, "Varanasi": 23
       },
       "variety": {
-        "Guntur": 0,
-        "Byadgi": 1,
-        "Teja": 2,
-        "Sannam": 3,
-        "Kashmiri": 4,
-        "Warangal": 5
+        "Guntur": 0, "Teja": 1, "Byadgi": 2, "Kashmiri": 3,
+        "Sannam": 4, "Wonder Hot": 5, "Pusa Jwala": 6, "Bhut Jolokia": 7,
+        "Kanthari": 8, "Dhani": 9, "Reshampatti": 10, "Ellachipur": 11
       }
     }
     logger.info("✓ Created default encoders")
   
   def encode_features(self, city: str, variety: str) -> tuple:
     """Encode categorical features"""
-    market_encoded = self.encoders.get("market", {}).get(city, 0)
+    city_encoded = self.encoders.get("city", {}).get(city, 0)
     variety_encoded = self.encoders.get("variety", {}).get(variety, 0)
-    return market_encoded, variety_encoded
+    return city_encoded, variety_encoded
   
   def prepare_features(
     self,
@@ -116,15 +111,15 @@ class ModelManager:
     temperature: float
   ) -> np.ndarray:
     """Prepare features for model prediction"""
-    market_encoded, variety_encoded = self.encode_features(city, variety)
+    city_encoded, variety_encoded = self.encode_features(city, variety)
     
-    # Feature array: [arrivals, rainfall, temperature, month, market_encoded, variety_encoded]
+    # Feature array: [arrivals, rainfall, temperature, month, city_encoded, variety_encoded]
     features = np.array([[
       arrivals,
       rainfall,
       temperature,
       month,
-      market_encoded,
+      city_encoded,
       variety_encoded
     ]])
     
@@ -206,18 +201,24 @@ class ModelManager:
   def _validate_prediction(self, prediction: float, variety: str) -> float:
     """Validate and correct prediction if out of expected range"""
     
-    # Expected price ranges for each variety (₹ per quintal)
+    # Expected price ranges for each variety (₹ per quintal) - match frontend realistic range
     expected_ranges = {
-      "Guntur": (25000, 32000),
-      "Byadgi": (28000, 37000),
-      "Teja": (26000, 35000),
-      "Sannam": (24000, 30000),
-      "Kashmiri": (31000, 40000),
-      "Warangal": (24000, 31000)
+      "Guntur": (20000, 30000),
+      "Teja": (20000, 30000),
+      "Byadgi": (20000, 30000),
+      "Kashmiri": (20000, 30000),
+      "Sannam": (20000, 30000),
+      "Wonder Hot": (20000, 30000),
+      "Pusa Jwala": (20000, 30000),
+      "Bhut Jolokia": (20000, 30000),
+      "Kanthari": (20000, 30000),
+      "Dhani": (20000, 30000),
+      "Reshampatti": (20000, 30000),
+      "Ellachipur": (20000, 30000)
     }
     
     # Get expected range for variety
-    min_price, max_price = expected_ranges.get(variety, (25000, 40000))
+    min_price, max_price = expected_ranges.get(variety, (20000, 30000))
     
     # Check if prediction is out of range
     if prediction < min_price:

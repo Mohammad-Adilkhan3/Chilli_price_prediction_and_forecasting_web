@@ -25,7 +25,7 @@ ALLOWED_ORIGINS = [
 ]
 
 # Model Settings
-MODEL_PATH = BASE_DIR / "models"
+MODEL_PATH = BASE_DIR / "data" / "models"
 DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "random_forest")
 
 # Data Settings
@@ -48,7 +48,7 @@ FEATURE_COLUMNS = [
   "rainfall",
   "temperature",
   "month",
-  "market_encoded",
+  "city_encoded",
   "variety_encoded",
 ]
 

@@ -10,22 +10,36 @@ import random
 from pathlib import Path
 
 # Configuration
-NUM_SAMPLES = 500000  # Increased from 100,000 to 500,000 for better model training
-START_DATE = datetime(2010, 1, 1)
-END_DATE = datetime(2024, 12, 31)
+NUM_SAMPLES = 145152  # Match frontend dataset size (21 years × 12 months × 24 cities × 12 varieties × 2 samples)
+START_DATE = datetime(2005, 1, 1)
+END_DATE = datetime(2025, 12, 31)
 
-# Markets and varieties
-MARKETS = ["Bangalore", "Delhi", "Mumbai", "Guntur", "Hyderabad", "Chennai", "Pune", "Kolkata"]
-VARIETIES = ["Guntur", "Byadgi", "Teja", "Sannam", "Kashmiri", "Warangal"]
+# Markets and varieties (match frontend exactly)
+MARKETS = [
+  'Bangalore', 'Mumbai', 'Delhi', 'Chennai', 'Kolkata', 'Hyderabad',
+  'Pune', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Kanpur', 'Nagpur',
+  'Indore', 'Bhopal', 'Visakhapatnam', 'Patna', 'Vadodara', 'Ludhiana',
+  'Agra', 'Nashik', 'Faridabad', 'Meerut', 'Rajkot', 'Varanasi'
+]
+VARIETIES = [
+  'Guntur', 'Teja', 'Byadgi', 'Kashmiri', 'Sannam', 'Wonder Hot',
+  'Pusa Jwala', 'Bhut Jolokia', 'Kanthari', 'Dhani', 'Reshampatti', 'Ellachipur'
+]
 
-# Base prices for different varieties (₹ per quintal)
+# Base prices for different varieties (₹ per quintal) - match frontend realistic range
 BASE_PRICES = {
-  "Guntur": 28500,
-  "Byadgi": 32500,
-  "Teja": 30500,
-  "Sannam": 27000,
-  "Kashmiri": 35500,
-  "Warangal": 27500
+  "Guntur": 24000,
+  "Teja": 25200,
+  "Byadgi": 24720,
+  "Kashmiri": 25920,
+  "Sannam": 23520,
+  "Wonder Hot": 24480,
+  "Pusa Jwala": 24960,
+  "Bhut Jolokia": 26400,
+  "Kanthari": 24960,
+  "Dhani": 23760,
+  "Reshampatti": 24720,
+  "Ellachipur": 24240
 }
 
 def generate_dataset(num_samples: int = NUM_SAMPLES) -> pd.DataFrame:
@@ -77,16 +91,32 @@ def generate_dataset(num_samples: int = NUM_SAMPLES) -> pd.DataFrame:
     temperature = base_temp + temp_seasonal + np.random.normal(0, 2)
     temperature = max(15, min(temperature, 40))  # Clamp between 15-40
     
-    # Market factor (some markets have premium prices)
+    # Market factor (some markets have premium prices) - match frontend
     market_factors = {
-      "Delhi": 0.05,
-      "Mumbai": 0.08,
-      "Bangalore": 0.03,
-      "Guntur": -0.02,  # Production center, lower prices
-      "Hyderabad": 0.02,
-      "Chennai": 0.04,
-      "Pune": 0.03,
-      "Kolkata": 0.02
+      'Bangalore': 0.02,
+      'Mumbai': 0.04,
+      'Delhi': 0.03,
+      'Chennai': 0.0,
+      'Kolkata': -0.01,
+      'Hyderabad': 0.01,
+      'Pune': 0.02,
+      'Ahmedabad': 0.02,
+      'Jaipur': 0.01,
+      'Lucknow': -0.01,
+      'Kanpur': -0.02,
+      'Nagpur': 0.0,
+      'Indore': 0.01,
+      'Bhopal': -0.01,
+      'Visakhapatnam': 0.02,
+      'Patna': -0.02,
+      'Vadodara': 0.01,
+      'Ludhiana': 0.03,
+      'Agra': -0.01,
+      'Nashik': 0.0,
+      'Faridabad': 0.02,
+      'Meerut': -0.01,
+      'Rajkot': 0.01,
+      'Varanasi': -0.02
     }
     market_factor = market_factors.get(market, 0)
     
@@ -99,7 +129,7 @@ def generate_dataset(num_samples: int = NUM_SAMPLES) -> pd.DataFrame:
       rainfall_factor + market_factor + noise
     )
     price = base_price * total_factor
-    price = max(25000, price)  # Minimum price floor
+    price = max(20000, min(30000, price))  # Realistic price range 20k-30k
     
     # Round values
     price = round(price, 2)
@@ -110,7 +140,7 @@ def generate_dataset(num_samples: int = NUM_SAMPLES) -> pd.DataFrame:
     # Append record
     data.append({
       "date": date.strftime("%Y-%m-%d"),
-      "market": market,
+      "city": market,  # Changed from "market" to "city" to match frontend
       "variety": variety,
       "price": price,
       "arrivals": arrivals,
@@ -130,7 +160,7 @@ def generate_dataset(num_samples: int = NUM_SAMPLES) -> pd.DataFrame:
   print(f"\n✅ Dataset generated successfully!")
   print(f"   Total samples: {len(df):,}")
   print(f"   Date range: {df['date'].min()} to {df['date'].max()}")
-  print(f"   Markets: {df['market'].nunique()}")
+  print(f"   Cities: {df['city'].nunique()}")
   print(f"   Varieties: {df['variety'].nunique()}")
   print(f"   Price range: ₹{df['price'].min():.2f} - ₹{df['price'].max():.2f}")
   

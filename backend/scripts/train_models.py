@@ -48,15 +48,15 @@ class ModelTrainer:
     print("\n🔧 Preprocessing data...")
     
     # Create label encoders for categorical variables
-    self.encoders["market"] = {
-      market: idx for idx, market in enumerate(self.df["market"].unique())
+    self.encoders["city"] = {
+      city: idx for idx, city in enumerate(self.df["city"].unique())
     }
     self.encoders["variety"] = {
       variety: idx for idx, variety in enumerate(self.df["variety"].unique())
     }
     
     # Encode categorical features
-    self.df["market_encoded"] = self.df["market"].map(self.encoders["market"])
+    self.df["city_encoded"] = self.df["city"].map(self.encoders["city"])
     self.df["variety_encoded"] = self.df["variety"].map(self.encoders["variety"])
     
     # Select features
@@ -65,7 +65,7 @@ class ModelTrainer:
       "rainfall",
       "temperature",
       "month",
-      "market_encoded",
+      "city_encoded",
       "variety_encoded"
     ]
     
@@ -177,7 +177,7 @@ class ModelTrainer:
   def save_models(self, output_dir: str = None):
     """Save trained models and encoders"""
     if output_dir is None:
-      output_dir = Path(__file__).parent.parent / "models"
+      output_dir = Path(__file__).parent.parent / "data" / "models"
     else:
       output_dir = Path(output_dir)
     
