@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import routes from "../../routes";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
@@ -15,10 +15,12 @@ const Header: React.FC = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-2 group">
-              <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center glow-primary transition-smooth group-hover:scale-110">
-                <Sparkles className="w-5 h-5 text-primary-foreground" />
-              </div>
+            <Link to="/" className="flex items-center gap-3 group">
+              <img 
+                src="/icar-logo.jpg" 
+                alt="ICAR Logo" 
+                className="w-10 h-10 object-contain transition-smooth group-hover:scale-110"
+              />
               <span className="text-xl font-bold gradient-text">
                 AgriAI
               </span>
